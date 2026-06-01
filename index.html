@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>重要三件事 — 产品方案</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", sans-serif; background: #121314; color: #eee; padding: 60px 40px; min-width: 1100px; font-size: 15px; }
+h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
+.section { max-width: 1200px; margin: 0 auto 80px; }
+.section-num { font-size: 56px; font-weight: 800; color: #007aff; opacity: .3; line-height: 1; }
+.section-title { font-size: 28px; font-weight: 700; margin-top: -10px; margin-bottom: 20px; }
+.divider { border: none; border-top: 1px solid #2a2b2e; margin: 72px auto; max-width: 1200px; }
+.card { background: #1e1f22; border-radius: 12px; padding: 24px; border: 1px solid #2a2b2e; }
+.card h4 { font-size: 16px; color: #74b9ff; margin-bottom: 10px; }
+.card p { font-size: 15px; color: #ccc; line-height: 1.7; }
+.row { display: flex; gap: 16px; }
+.row .col { flex: 1; }
+.design-note { background: #1a1d20; border-left: 3px solid #007aff; padding: 16px 20px; border-radius: 0 8px 8px 0; margin-top: 28px; }
+.design-note h5 { font-size: 14px; color: #007aff; margin-bottom: 6px; }
+.design-note p { font-size: 14px; color: #bbb; line-height: 1.7; }
+
+/* 背景 */
+.bg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.bg-card { background: #1e1f22; border-radius: 10px; padding: 16px; border: 1px solid #2a2b2e; }
+.bg-card .label { font-size: 14px; color: #f5a623; margin-bottom: 6px; }
+.bg-card .text { font-size: 15px; color: #ccc; line-height: 1.7; }
+
+/* 优先级 */
+.priority-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.pri-card { border-radius: 10px; padding: 16px; border: 1px solid #2a2b2e; }
+.pri-card.high { background: #2a1515; border-color: #ff3b30; }
+.pri-card.mid { background: #2a2215; border-color: #ff9500; }
+.pri-card.low { background: #152a1a; border-color: #34c759; }
+.pri-card .pri-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.pri-card .pri-desc { font-size: 14px; color: #999; line-height: 1.6; }
+.pri-card .pri-examples { font-size: 14px; color: #ccc; margin-top: 8px; line-height: 1.7; }
+
+/* 触达方案 */
+.scheme-group { margin-bottom: 72px; }
+.scheme-group .sg-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: #fff; }
+.scheme-row { display: flex; gap: 48px; align-items: flex-start; justify-content: center; padding-top: 48px; }
+.scheme-item { text-align: center; }
+.scheme-item .rec { font-size: 15px; background: #007aff; color: #fff; padding: 8px 20px; border-radius: 8px; margin-bottom: 6px; display: inline-block; font-weight: 600; box-shadow: 0 2px 10px rgba(0,122,255,.35); white-space: nowrap; }
+.scheme-item .phone-mini { width: 300px; height: 652px; background: #000; border-radius: 34px; padding: 8px; margin: 0 auto 8px; }
+.scheme-item .phone-mini .inner { width: 100%; height: 100%; border-radius: 28px; overflow: hidden; }
+.scheme-item .label { font-size: 14px; color: #999; margin-top: 16px; }
+.scheme-item .reason { font-size: 13px; color: #666; margin-top: 6px; max-width: 300px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.scheme-item [style*="border-radius"][style*="padding"] { text-align: left; }
+
+/* 日视图大图 */
+.dayview-full { background: #fff; border-radius: 20px; overflow: hidden; width: 392px; margin: 0 auto; box-shadow: 0 8px 40px rgba(0,0,0,.3); }
+.dayview-full .dv-top { background: linear-gradient(135deg, #3482FF, #357abd); padding: 44px 20px 16px; color: #fff; position: relative; }
+.dayview-full .dv-top .dv-date { font-size: 40px; font-weight: 200; }
+.dayview-full .dv-top .dv-week { font-size: 15px; opacity: .7; margin-top: 2px; }
+.dayview-full .dv-summary { margin: 10px 14px; background: #fff8e1; border-radius: 10px; padding: 10px 12px; font-size: 14px; color: #333; display: flex; align-items: center; gap: 6px; }
+.dayview-full .dv-section { padding: 4px 14px; }
+.dayview-full .dv-section .ds-label { font-size: 13px; color: #999; border-left: 3px solid #007aff; padding-left: 8px; margin: 12px 0 8px; }
+.dayview-full .dv-item { background: #f8f9fa; border-radius: 10px; padding: 12px; margin-bottom: 8px; cursor: pointer; transition: background .15s; }
+.dayview-full .dv-item:hover { background: #eef3f8; }
+.dayview-full .dv-item .di-time { font-size: 13px; color: #007aff; font-weight: 500; }
+.dayview-full .dv-item .di-title { font-size: 16px; font-weight: 500; color: #222; margin: 3px 0; }
+.dayview-full .dv-item .di-loc { font-size: 13px; color: #666; margin-bottom: 5px; }
+.dayview-full .dv-item .di-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.dayview-full .dv-item .di-tags .tag { font-size: 12px; padding: 3px 8px; border-radius: 4px; }
+.dayview-full .dv-item .di-tags .tag-nav { background: #e3f2fd; color: #1976d2; }
+.dayview-full .dv-item .di-tags .tag-warn { background: #fff3e0; color: #e65100; }
+.dayview-full .dv-item .di-tags .tag-ai { background: #f3e5f5; color: #7b1fa2; }
+.dayview-full .dv-important { background: #fff5f5; border-radius: 10px; padding: 12px; margin-bottom: 8px; border: 1px solid #ffcdd2; cursor: pointer; }
+.dayview-full .dv-important:hover { background: #ffebee; }
+.dayview-full .dv-important .dvi-label { font-size: 9px; color: #d32f2f; font-weight: 500; }
+.dayview-full .dv-important .dvi-title { font-size: 13px; color: #222; font-weight: 500; margin-top: 3px; }
+.dayview-full .dv-important .dvi-desc { font-size: 11px; color: #666; margin-top: 3px; }
+.dayview-full .dv-important.yellow { background: #fffde7; border-color: #fff59d; }
+.dayview-full .dv-important.yellow:hover { background: #fff9c4; }
+.dayview-full .dv-important.yellow .dvi-label { color: #e65100; }
+
+/* 月视图大图 */
+.monthview-full { background: #fff; border-radius: 20px; padding: 20px; width: 392px; box-shadow: 0 8px 40px rgba(0,0,0,.3); }
+.monthview-full .mv-header { font-size: 18px; font-weight: 600; color: #222; margin-bottom: 12px; }
+.monthview-full .mv-weekdays { display: grid; grid-template-columns: repeat(7,1fr); margin-bottom: 6px; }
+.monthview-full .mv-weekdays span { text-align: center; font-size: 11px; color: #999; }
+.monthview-full .mv-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; margin-bottom: 14px; }
+.monthview-full .mv-grid .d { text-align: center; font-size: 13px; color: #333; padding: 7px 0; }
+.monthview-full .mv-grid .d.today { background: #007aff; color: #fff; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+.monthview-full .mv-ai { background: linear-gradient(135deg, #f0f7ff, #e8f0fe); border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid rgba(0,122,255,.15); cursor: pointer; }
+.monthview-full .mv-ai:hover { background: linear-gradient(135deg, #e4f0ff, #dbe8fd); }
+.monthview-full .mv-ai .mai-h { font-size: 11px; color: #007aff; margin-bottom: 4px; font-weight: 500; }
+.monthview-full .mv-ai .mai-t { font-size: 12px; color: #222; line-height: 1.5; }
+.monthview-full .mv-add { background: #f8f8f8; border-radius: 12px; padding: 12px; border: 1px dashed #ddd; }
+.monthview-full .mv-add span { font-size: 11px; color: #666; }
+
+/* 流程 */
+.flow-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+.flow-node { background: #1e1f22; border: 1px solid #2a2b2e; border-radius: 8px; padding: 12px 18px; font-size: 14px; color: #ccc; text-align: center; }
+.flow-node.blue { border-color: #007aff; color: #007aff; }
+
+/* mini phone styles - 300x652 (392:851 等比缩小) */
+.mini-lock { background: linear-gradient(180deg, #1a3a5c, #0a1a2c); color: #fff; height: 100%; padding: 46px 16px 16px; text-align: center; }
+.mini-lock .ml-time { font-size: 50px; font-weight: 200; }
+.mini-lock .ml-date { font-size: 12px; opacity: .6; margin-top: 3px; }
+.mini-lock .ml-island { margin-top: 24px; background: rgba(0,0,0,.6); border-radius: 14px; padding: 12px; text-align: left; }
+.mini-lock .ml-island .mli-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+.mini-lock .ml-island .mli-item { font-size: 11px; opacity: .7; line-height: 1.7; }
+.mini-lock .ml-island .mli-tag { font-size: 9px; background: rgba(255,59,48,.4); color: #ff6b6b; padding: 2px 6px; border-radius: 3px; margin-top: 6px; display: inline-block; }
+
+.mini-lock-v2 { background: linear-gradient(180deg, #1a3a5c, #0a1a2c); color: #fff; height: 100%; padding: 46px 16px 16px; text-align: center; }
+.mini-lock-v2 .ml-time { font-size: 50px; font-weight: 200; }
+.mini-lock-v2 .ml-date { font-size: 12px; opacity: .6; margin-top: 3px; }
+.mini-lock-v2 .ml-notif { margin-top: 24px; text-align: left; }
+.mini-lock-v2 .ml-notif .nf { background: rgba(255,255,255,.12); border-radius: 12px; padding: 12px; margin-bottom: 6px; }
+.mini-lock-v2 .ml-notif .nf .nf-h { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+.mini-lock-v2 .ml-notif .nf .nf-h .nf-icon { width: 16px; height: 16px; background: #007aff; border-radius: 4px; font-size: 9px; display: flex; align-items: center; justify-content: center; }
+.mini-lock-v2 .ml-notif .nf .nf-h span { font-size: 10px; opacity: .5; }
+.mini-lock-v2 .ml-notif .nf .nf-t { font-size: 12px; font-weight: 500; }
+.mini-lock-v2 .ml-notif .nf .nf-d { font-size: 10px; opacity: .6; margin-top: 3px; }
+
+.mini-home { background: linear-gradient(180deg, #e8f4fd, #d1e8f8); height: 100%; padding: 46px 12px 12px; }
+.mini-home .mh-widgets { display: flex; gap: 10px; margin-bottom: 12px; }
+.mini-home .mh-w { background: rgba(255,255,255,.85); border-radius: 12px; padding: 10px; flex: 1; }
+.mini-home .mh-w .mhw-t { font-size: 9px; color: #666; }
+.mini-home .mh-w .mhw-v { font-size: 22px; font-weight: 600; color: #222; }
+.mini-home .mh-card { background: rgba(255,255,255,.92); border-radius: 12px; padding: 12px; border: 1px solid rgba(0,122,255,.2); }
+.mini-home .mh-card .mhc-h { font-size: 10px; color: #007aff; margin-bottom: 6px; }
+.mini-home .mh-card .mhc-item { font-size: 11px; color: #222; line-height: 1.9; display: flex; align-items: center; gap: 5px; }
+.mini-home .mh-card .mhc-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+.mini-home-v2 { background: linear-gradient(180deg, #e8f4fd, #d1e8f8); height: 100%; padding: 46px 12px 12px; }
+.mini-home-v2 .mh-banner { background: rgba(255,255,255,.92); border-radius: 12px; padding: 12px; margin-bottom: 12px; border: 1px solid rgba(0,122,255,.15); }
+.mini-home-v2 .mh-banner .mhb-h { font-size: 10px; color: #007aff; margin-bottom: 4px; }
+.mini-home-v2 .mh-banner .mhb-t { font-size: 12px; color: #222; font-weight: 500; }
+.mini-home-v2 .mh-banner .mhb-d { font-size: 10px; color: #666; margin-top: 3px; }
+
+.mini-minus { background: #f5f5f7; height: 100%; padding: 46px 12px 12px; }
+.mini-minus .mm-search { background: rgba(0,0,0,.05); border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #999; margin-bottom: 10px; }
+.mini-minus .mm-card { background: #fff; border-radius: 12px; padding: 12px; margin-bottom: 8px; }
+.mini-minus .mm-card .mmc-label { font-size: 9px; color: #fff; padding: 2px 5px; border-radius: 3px; display: inline-block; margin-bottom: 3px; }
+.mini-minus .mm-card .mmc-title { font-size: 12px; font-weight: 500; color: #222; }
+.mini-minus .mm-card .mmc-desc { font-size: 10px; color: #666; margin-top: 2px; }
+
+.mini-minus-v2 { background: #f5f5f7; height: 100%; padding: 46px 12px 12px; }
+.mini-minus-v2 .mm-banner { background: linear-gradient(135deg, #f0f7ff, #e8f0fe); border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid rgba(0,122,255,.12); }
+.mini-minus-v2 .mm-banner .mmb-h { font-size: 10px; color: #007aff; margin-bottom: 4px; }
+.mini-minus-v2 .mm-banner .mmb-items { font-size: 11px; color: #222; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<h1>重要三件事 — 产品方案</h1>
+
+<!-- ===== 01 背景 ===== -->
+<div class="section">
+<div class="section-num">01</div>
+<div class="section-title">背景</div>
+
+<div class="bg-grid">
+<div class="bg-card">
+<div class="label">痛点1：重要信息被淹没</div>
+<div class="text">欠费短信淹没在营销短信中易忽略<br>上周挂的专家号被后来的短信淹没，差点忘了明天要去<br>领导给我打了2个电话，我开静音了没听到</div>
+</div>
+<div class="bg-card">
+<div class="label">痛点2：未来需要关注的事情记不住</div>
+<div class="text">5点有个评审会，上次会议遗留待办还未完成<br>演唱会门票马上就要开始抢票了<br>黄金涨到了我设的止盈线，再不卖可能回落</div>
+</div>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+<h4>产品定义</h4>
+<p style="font-size:15px;color:#fff;">将「近期被忽略的重要信息」和「即将需要行动的事项」主动呈现给用户</p>
+</div>
+
+<div class="row" style="margin-top:16px;">
+<div class="card col">
+<h4>推送时机（第一期：固定三次）</h4>
+<p><b style="color:#fff;">早间 07:30</b> — 今日预览：汇总今天的日程 + 昨晚遗留的未处理重要信息（欠费/快递/未接来电）<br><b style="color:#fff;">午间 12:00</b> — 午间提醒：下午需要行动的事项（出发建议/即将截止/上午新增的重要信息）<br><b style="color:#fff;">晚间 20:00</b> — 今日复盘：未完成事项汇总 + 明日预告（明天第一件事）</p>
+</div>
+<div class="card col">
+<h4>静默规则</h4>
+<p><b style="color:#4ecdc4;">正常推送：</b>到固定时间点即推送，无论有几条事项<br><b style="color:#f5a623;">跳过推送：</b>勿扰模式开启时延后到结束后推送；当次无任何事项时不推送空卡片</p>
+</div>
+</div>
+
+</div>
+
+<hr class="divider">
+
+<!-- ===== 03 触达方式 ===== -->
+<div class="section">
+<div class="section-num">02</div>
+<div class="section-title">触达方式</div>
+<p style="font-size:15px;color:#888;margin-bottom:24px;">每种入口提供多种样式方案对比，标注推荐方案及原因。所有入口点击后统一跳转日历日视图改造页。</p>
+
+<!-- 锁屏 -->
+<div class="scheme-group">
+<div class="sg-title">锁屏</div>
+<div class="scheme-row">
+<!-- 方案A：岛展开 -->
+<div class="scheme-item">
+<div style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;background:url(assets/figma-0.png) center/cover no-repeat;">
+<!-- ⭐ 岛展开通知 - 位于时间下方 y≈310px -->
+<div style="position:absolute;top:310px;left:14px;right:14px;background:rgba(0,0,0,.5);border-radius:20px;padding:16px 18px;backdrop-filter:blur(20px);">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><div style="width:20px;height:20px;background:linear-gradient(135deg,#3482FF,#5856d6);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">🧠</div><span style="font-size:11px;color:rgba(255,255,255,.5);">小爱建议 · 重要事项</span></div>
+<div style="font-size:15px;font-weight:500;color:#fff;margin-bottom:8px;">今天有3件事需关注</div>
+<div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;">• 航班MU2805延误40分钟<br>• 信用卡还款今日截止 ¥3,280<br>• 14:00会议，建议13:30出发</div>
+</div>
+</div>
+<div class="label">方案A：岛展开 · 聚合卡片</div>
+<div class="reason">一次展示所有事项，信息密度高</div>
+</div>
+<!-- 方案B：单条通知（推荐） -->
+<div class="scheme-item">
+<div style="position:relative;">
+<div class="rec" style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);z-index:1;">✓ 推荐</div>
+<div style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;background:url(assets/figma-0.png) center/cover no-repeat;">
+<!-- ⭐ 单条摘要通知 - 位于时间下方 y≈320px -->
+<div style="position:absolute;top:320px;left:14px;right:14px;background:rgba(0,0,0,.5);border-radius:16px;padding:12px 16px;backdrop-filter:blur(20px);">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><div style="width:18px;height:18px;background:linear-gradient(135deg,#3482FF,#5856d6);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;">🧠</div><span style="font-size:10px;color:rgba(255,255,255,.45);">小爱建议 · 重要事项</span></div>
+<div style="font-size:13px;color:#fff;line-height:1.5;">航班延误40分钟 · 信用卡今日到期 · 14点建议提前出发</div>
+<div style="font-size:9px;color:rgba(255,255,255,.3);margin-top:4px;">点击查看详情 →</div>
+</div>
+</div>
+</div>
+<div class="label">方案B：单条摘要通知</div>
+<div class="reason">一条通知+摘要，和系统通知风格一致</div>
+</div>
+</div>
+</div>
+
+<!-- 桌面 -->
+<div class="scheme-group">
+<div class="sg-title">桌面</div>
+<div class="scheme-row">
+<!-- 方案A：列表式（推荐） -->
+<div class="scheme-item">
+<div style="position:relative;">
+<div class="rec" style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);z-index:1;">✓ 推荐</div>
+<div style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;background:url(assets/figma-1.png) center/cover no-repeat;">
+<!-- ⭐ AI建议卡 - 列表式，位于 widget 下方 y≈480px -->
+<div style="position:absolute;top:480px;left:14px;right:14px;background:rgba(255,255,255,.88);border-radius:20px;padding:14px 16px;backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.06);">
+<div style="font-size:11px;color:#3482FF;font-weight:500;margin-bottom:8px;">🧠 小爱建议 · 重要事项</div>
+<div style="display:flex;align-items:center;gap:8px;padding:5px 0;"><div style="width:6px;height:6px;background:#ff3b30;border-radius:50%;flex-shrink:0;"></div><span style="font-size:14px;color:#000;">航班MU2805延误40分钟</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:5px 0;"><div style="width:6px;height:6px;background:#ff9500;border-radius:50%;flex-shrink:0;"></div><span style="font-size:14px;color:#000;">信用卡还款今日截止 ¥3,280</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:5px 0;"><div style="width:6px;height:6px;background:#34c759;border-radius:50%;flex-shrink:0;"></div><span style="font-size:14px;color:#000;">14:00客户会议，路程45分钟</span></div>
+</div>
+</div>
+</div>
+<div class="label">方案A：列表式建议卡</div>
+<div class="reason">三条直接可见+色标，不点击就完成信息获取</div>
+</div>
+<!-- 方案B：摘要式 -->
+<div class="scheme-item">
+<div style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;background:url(assets/figma-1.png) center/cover no-repeat;">
+<!-- ⭐ AI建议卡 - 摘要式，位于 widget 下方 y≈480px -->
+<div style="position:absolute;top:480px;left:14px;right:14px;background:rgba(255,255,255,.88);border-radius:20px;padding:14px 16px;backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.06);">
+<div style="font-size:11px;color:#3482FF;font-weight:500;margin-bottom:4px;">🧠 小爱建议 · 重要事项</div>
+<div style="font-size:14px;color:#000;line-height:1.5;">航班延误，信用卡今日截止，14点有出行建议</div>
+<div style="font-size:11px;color:rgba(0,0,0,.3);margin-top:6px;">点击查看详情 →</div>
+</div>
+</div>
+<div class="label">方案B：摘要式单卡</div>
+<div class="reason">占位小，但需点进去看具体内容</div>
+</div>
+</div>
+</div>
+
+<!-- 负一屏 -->
+<div class="scheme-group">
+<div class="sg-title">负一屏</div>
+<div class="scheme-row">
+<!-- 方案A：独立卡片列表（推荐） -->
+<div class="scheme-item">
+<div style="position:relative;">
+<div class="rec" style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);z-index:1;">✓ 推荐</div>
+<div style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;background:url(assets/飞机.png) center/cover no-repeat;">
+<!-- ⭐ 重要事项卡片 - 位于快捷服务下方 y≈280px -->
+<div style="position:absolute;top:330px;left:14px;right:14px;">
+<div style="background:rgba(255,255,255,.92);border-radius:24px;padding:20px;backdrop-filter:blur(16px);text-align:left;">
+<!-- 标题 -->
+<div style="font-size:13px;font-weight:500;color:#3482FF;margin-bottom:14px;">🧠 小爱建议 · 重要事项</div>
+<!-- 事项1 -->
+<div style="padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.06);">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:11px;background:#ff3b30;color:#fff;padding:2px 8px;border-radius:4px;font-weight:500;">紧急</span><span style="font-size:11px;color:rgba(0,0,0,.3);">08:15 短信</span></div>
+<div style="font-size:16px;font-weight:600;color:#000;margin-top:6px;">航班MU2805状态变更</div>
+<div style="font-size:13px;color:rgba(0,0,0,.5);margin-top:4px;">延误约40分钟，新到达10:05，建议调整后续行程</div>
+</div>
+<!-- 事项2 -->
+<div style="padding:14px 0;border-bottom:1px solid rgba(0,0,0,.06);">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:11px;background:#ff9500;color:#fff;padding:2px 8px;border-radius:4px;font-weight:500;">今日截止</span><span style="font-size:11px;color:rgba(0,0,0,.3);">银行短信</span></div>
+<div style="font-size:16px;font-weight:600;color:#000;margin-top:6px;">招行信用卡还款提醒</div>
+<div style="font-size:13px;color:rgba(0,0,0,.5);margin-top:4px;">¥3,280.50，今日24:00前还款，避免逾期</div>
+</div>
+<!-- 事项3 -->
+<div style="padding-top:14px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:11px;background:#34c759;color:#fff;padding:2px 8px;border-radius:4px;font-weight:500;">建议</span><span style="font-size:11px;color:rgba(0,0,0,.3);">日程分析</span></div>
+<div style="font-size:16px;font-weight:600;color:#000;margin-top:6px;">14:00 客户会议出行建议</div>
+<div style="font-size:13px;color:rgba(0,0,0,.5);margin-top:4px;">德基广场18km，拥堵，建议13:15出发打车</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="label">方案A：独立卡片列表</div>
+<div class="reason">每条独立展示，支持逐条操作，适合主动查看</div>
+</div>
+<!-- 方案B：聚合卡片 -->
+<div class="scheme-item">
+<div style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;background:url(assets/飞机.png) center/cover no-repeat;">
+<!-- ⭐ 聚合卡片 - 同位置 -->
+<div style="position:absolute;top:330px;left:14px;right:14px;">
+<div style="background:rgba(255,255,255,.9);border-radius:16px;padding:14px 16px;backdrop-filter:blur(12px);text-align:left;">
+<div style="font-size:12px;color:#3482FF;font-weight:500;margin-bottom:6px;">🧠 小爱建议 · 重要事项</div>
+<div style="font-size:14px;color:#000;line-height:1.8;">🔴 航班MU2805延误40分钟<br>🟡 信用卡还款今日截止 ¥3,280<br>🟢 14:00会议，建议13:15出发</div>
+</div>
+</div>
+</div>
+<div class="label">方案B：聚合卡片</div>
+<div class="reason">占位小，但主动查看场景应给足信息</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 04 日历内改造 ===== -->
+<div class="section">
+<div class="section-num">03</div>
+<div class="section-title">日历内改造</div>
+<p style="font-size:15px;color:#888;margin-bottom:24px;">日历是所有入口的最终落地页。两个改造点：月视图新增AI建议卡引流，日视图从壁纸页改造为今日全景信息页。</p>
+
+<!-- 月视图 -->
+<div style="margin-bottom:48px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;">月视图：新增 AI 建议卡</div>
+<div style="font-size:15px;color:#888;margin-bottom:16px;">位置：在现有节日倒数列表上方 · 点击跳转日视图</div>
+<div style="display:flex;gap:32px;align-items:flex-start;">
+<!-- 月视图 - 对齐 OS4 设计稿 -->
+<div style="width:392px;height:851px;min-width:392px;background:#fff;border-radius:51px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;">
+<!-- 状态栏 -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px 0;font-size:11px;color:#333;"><span>2:36</span><span style="font-size:10px;">●●● ▶ 🔋</span></div>
+<!-- 标题行 -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px 12px;">
+<div style="font-size:24px;font-weight:700;color:#111;">10月</div>
+<div style="display:flex;gap:16px;align-items:center;"><span style="font-size:20px;color:#333;">+</span><span style="font-size:16px;color:#333;">⋮</span></div>
+</div>
+<!-- 周横排 -->
+<div style="display:grid;grid-template-columns:repeat(7,1fr);padding:0 14px;margin-bottom:6px;">
+<span style="text-align:center;font-size:12px;color:#999;">一</span><span style="text-align:center;font-size:12px;color:#999;">二</span><span style="text-align:center;font-size:12px;color:#999;">三</span><span style="text-align:center;font-size:12px;color:#999;">四</span><span style="text-align:center;font-size:12px;color:#999;">五</span><span style="text-align:center;font-size:12px;color:#3482FF;">六</span><span style="text-align:center;font-size:12px;color:#3482FF;">日</span>
+</div>
+<!-- 日期网格 -->
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:0;padding:0 14px 12px;">
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#ccc;">28</div><div style="font-size:9px;color:#ccc;">十八</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#ccc;">29</div><div style="font-size:9px;color:#ccc;">十九</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#ccc;">30</div><div style="font-size:9px;color:#ccc;">二十</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">1</div><div style="font-size:9px;color:#e53935;">国庆节</div></div>
+<div style="text-align:center;padding:10px 0;position:relative;"><div style="font-size:15px;color:#3482FF;">2</div><div style="font-size:9px;color:#999;">廿二</div><div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#3482FF;border-radius:50%;"></div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">3</div><div style="font-size:9px;color:#999;">廿三</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">4</div><div style="font-size:9px;color:#999;">廿四</div></div>
+<div style="text-align:center;padding:10px 0;position:relative;"><div style="font-size:15px;color:#3482FF;">5</div><div style="font-size:9px;color:#999;">廿五</div><div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#3482FF;border-radius:50%;"></div></div>
+<div style="text-align:center;padding:10px 0;position:relative;"><div style="font-size:15px;color:#3482FF;">6</div><div style="font-size:9px;color:#999;">廿六</div><div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#3482FF;border-radius:50%;"></div></div>
+<div style="text-align:center;padding:10px 0;position:relative;"><div style="font-size:15px;color:#3482FF;">7</div><div style="font-size:9px;color:#999;">廿七</div><div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#3482FF;border-radius:50%;"></div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">8</div><div style="font-size:9px;color:#999;">寒露</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">9</div><div style="font-size:9px;color:#999;">廿九</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">10</div><div style="font-size:9px;color:#e53935;">九月</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">11</div><div style="font-size:9px;color:#999;">初二</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">12</div><div style="font-size:9px;color:#999;">初三</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">13</div><div style="font-size:9px;color:#999;">初四</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">14</div><div style="font-size:9px;color:#999;">初五</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">15</div><div style="font-size:9px;color:#999;">初六</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="background:#3482FF;color:#fff;width:36px;height:36px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto;"><span style="font-size:14px;font-weight:500;">16</span><span style="font-size:8px;opacity:.8;">初七</span></div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">17</div><div style="font-size:9px;color:#999;">初八</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">18</div><div style="font-size:9px;color:#e53935;">重阳</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">19</div><div style="font-size:9px;color:#999;">初十</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">20</div><div style="font-size:9px;color:#999;">十一</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">21</div><div style="font-size:9px;color:#999;">十二</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">22</div><div style="font-size:9px;color:#999;">十三</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">23</div><div style="font-size:9px;color:#999;">霜降</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">24</div><div style="font-size:9px;color:#999;">十五</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#3482FF;">25</div><div style="font-size:9px;color:#999;">十六</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">26</div><div style="font-size:9px;color:#999;">十七</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">27</div><div style="font-size:9px;color:#999;">十八</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">28</div><div style="font-size:9px;color:#999;">十九</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">29</div><div style="font-size:9px;color:#999;">二十</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">30</div><div style="font-size:9px;color:#999;">廿一</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#333;">31</div><div style="font-size:9px;color:#999;">万圣夜</div></div>
+<div style="text-align:center;padding:10px 0;"><div style="font-size:15px;color:#ccc;">1</div><div style="font-size:9px;color:#ccc;">廿三</div></div>
+</div>
+<!-- 分割线 -->
+<div style="border-top:1px solid #f0f0f0;margin:0 20px;"></div>
+<!-- ⭐ 新增：AI 今日建议卡（最上方，最高优先级） -->
+<div style="padding:12px 16px 0;">
+<div style="font-size:14px;font-weight:500;color:#3482FF;margin-bottom:8px;">AI 建议</div>
+<div style="background:#fff;border-radius:16px;padding:14px 16px;border:1px solid rgba(0,0,0,.06);box-shadow:0 1px 4px rgba(0,0,0,.04);">
+<div style="font-size:16px;font-weight:500;color:#000;margin-bottom:4px;">⚡ 今天有3件事需关注</div>
+<div style="font-size:14px;color:rgba(0,0,0,.5);line-height:1.6;">航班延误需调整行程、信用卡今日到期、14点会议建议提前出发</div>
+<div style="display:flex;gap:8px;margin-top:10px;">
+<span style="font-size:12px;color:#3482FF;font-weight:500;">查看详情 →</span>
+</div>
+</div>
+</div>
+<!-- 发现新日程 -->
+<div style="padding:8px 16px;">
+<div style="background:#fff;border-radius:16px;padding:14px 16px;border:1px solid rgba(0,0,0,.06);">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+<span style="font-size:12px;color:#e53935;">✈</span>
+<span style="font-size:15px;font-weight:500;color:#000;">MU2805 南京-成都</span>
+</div>
+<div style="font-size:13px;color:rgba(0,0,0,.5);margin-bottom:10px;">10月21日 | 08:25-11:25</div>
+<div style="display:flex;gap:8px;">
+<span style="flex:1;text-align:center;padding:8px;border:1px solid rgba(0,0,0,.1);border-radius:8px;font-size:13px;color:rgba(0,0,0,.5);">忽略</span>
+<span style="flex:1;text-align:center;padding:8px;background:#3482FF;border-radius:8px;font-size:13px;color:#fff;font-weight:500;">添加</span>
+</div>
+</div>
+</div>
+<!-- 日期+农历 -->
+<div style="padding:12px 20px 4px;">
+<div style="font-size:13px;color:rgba(0,0,0,.4);margin-bottom:4px;">10月21日</div>
+<div style="background:#fff;border-radius:16px;padding:14px 16px;border:1px solid rgba(0,0,0,.06);">
+<div style="font-size:22px;font-weight:600;color:#3482FF;">九月十二</div>
+<div style="font-size:13px;color:rgba(0,0,0,.5);margin-top:4px;">丙午马年 戊戌月 戊辰日</div>
+</div>
+</div>
+<!-- 节日倒数 -->
+<div style="padding:8px 20px 6px;">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.04);"><div><div style="font-size:15px;font-weight:500;color:#000;">重阳节</div><div style="font-size:12px;color:rgba(0,0,0,.5);margin-top:2px;">九月初九 | 周日</div></div><div style="font-size:15px;font-weight:500;color:rgba(0,0,0,.4);">2天</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;"><div><div style="font-size:15px;font-weight:500;color:#000;">霜降</div><div style="font-size:12px;color:rgba(0,0,0,.5);margin-top:2px;">九月十四 | 周五</div></div><div style="font-size:15px;font-weight:500;color:rgba(0,0,0,.4);">7天</div></div>
+</div>
+<!-- 底部 Tab 栏 -->
+<div style="display:flex;justify-content:center;padding:10px 0;border-top:1px solid #f0f0f0;margin-top:auto;flex-shrink:0;">
+<div style="display:flex;align-items:center;background:#f5f5f5;border-radius:100px;padding:6px 8px;">
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">年</div>
+<div style="text-align:center;padding:8px 20px;background:#fff;border-radius:100px;box-shadow:0 1px 3px rgba(0,0,0,.1);font-size:13px;font-weight:600;color:#000;">月</div>
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">周</div>
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">日</div>
+</div>
+</div>
+</div>
+<div style="max-width:400px;min-width:360px;">
+<div class="design-note" style="margin-top:0;">
+<h5>样式来源</h5>
+<p>UI 对齐 OS4 日历设计稿：白底 + 蓝色高亮今日 + 周末蓝色 + 农历副文本 + 节日/节气红色标注。AI 建议卡使用浅蓝渐变底色与设计系统一致。</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 日视图 -->
+<div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;">日视图改造 ★ 核心落地页</div>
+<div style="font-size:15px;color:#888;margin-bottom:16px;">砍掉壁纸，默认信息态。整页就是：标题 → 重要事项 → 今日日程 → 底部Tab。</div>
+<div style="display:flex;gap:32px;align-items:flex-start;">
+
+<!-- 改造后的日视图 -->
+<div style="width:392px;height:851px;min-width:392px;background:#f3f3f3;border-radius:51px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;">
+<!-- 状态栏 -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px 0;font-size:12px;color:rgba(0,0,0,.7);">
+<span style="font-weight:600;">2:36</span><span>📶 🔋</span>
+</div>
+<!-- 标题栏: 日期 + 按钮 -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px 8px;">
+<span style="font-size:24px;font-weight:600;color:#000;">10月16日 周五</span>
+<div style="display:flex;gap:8px;">
+<div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#333;">+</div>
+<div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;">⋮</div>
+</div>
+</div>
+<!-- 内容区: 白色卡片 -->
+<div style="background:#fff;border-radius:20px;margin:4px 8px;padding:16px;flex:1;overflow-y:auto;">
+<!-- 重要事项 -->
+<div style="margin-bottom:14px;">
+<div style="font-size:14px;font-weight:500;color:#d32f2f;margin-bottom:10px;">⚡ 重要事项</div>
+<div style="background:#FFF5F5;border:1px solid #FFCDD2;border-radius:12px;padding:12px;margin-bottom:8px;">
+<div style="font-size:12px;color:#d32f2f;font-weight:500;">🔴 紧急 · 短信</div>
+<div style="font-size:16px;font-weight:500;color:#000;margin-top:4px;">航班MU2805延误40分钟</div>
+<div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:3px;">新预计到达10:05 <span style="color:#3482FF;">详情→</span></div>
+</div>
+<div style="background:#FFFDE7;border:1px solid #FFF9C4;border-radius:12px;padding:12px;">
+<div style="font-size:12px;color:#e65100;font-weight:500;">🟡 今日截止 · 短信</div>
+<div style="font-size:16px;font-weight:500;color:#000;margin-top:4px;">招行信用卡还款 ¥3,280</div>
+<div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:3px;">24:00前需还款 <span style="color:#3482FF;">去还款→</span></div>
+</div>
+</div>
+<!-- 分割线 -->
+<div style="height:1px;background:rgba(0,0,0,.06);margin-bottom:14px;"></div>
+<!-- 今日日程 -->
+<div>
+<div style="font-size:14px;font-weight:500;color:rgba(0,0,0,.4);margin-bottom:10px;">今日日程</div>
+<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);">
+<div style="width:7px;height:7px;background:#3482FF;border-radius:50%;margin-top:8px;flex-shrink:0;"></div>
+<div style="flex:1;"><div style="font-size:16px;font-weight:500;color:#000;">项目宣贯会</div><div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:2px;">16:00-17:00 | 2小时后开始</div></div>
+</div>
+<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);">
+<div style="width:7px;height:7px;background:#3482FF;border-radius:50%;margin-top:8px;flex-shrink:0;"></div>
+<div style="flex:1;"><div style="font-size:16px;font-weight:500;color:#000;">客户拜访 · 德基广场</div><div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:2px;">14:00-15:30 | <span style="color:#3482FF;">建议13:15出发</span></div></div>
+</div>
+<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;">
+<div style="width:7px;height:7px;background:#34c759;border-radius:50%;margin-top:8px;flex-shrink:0;"></div>
+<div style="flex:1;"><div style="font-size:16px;font-weight:500;color:#000;">明基医院看牙</div><div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:2px;">16:30-17:30 | <span style="color:#e65100;">⚠️ 与上场间隔紧</span></div></div>
+</div>
+</div>
+</div>
+<!-- 底部Tab栏 -->
+<div style="display:flex;justify-content:center;align-items:center;padding:12px 16px 28px;background:#f3f3f3;margin-top:auto;flex-shrink:0;">
+<div style="display:flex;align-items:center;background:#fff;border-radius:100px;padding:6px 8px;">
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">年</div>
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">月</div>
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">周</div>
+<div style="text-align:center;padding:8px 20px;background:rgba(0,0,0,.06);border-radius:100px;font-size:13px;font-weight:600;color:#000;">日</div>
+</div>
+</div>
+</div>
+
+<!-- 空状态 -->
+<div style="width:392px;height:851px;min-width:392px;background:#f3f3f3;border-radius:51px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;">
+<!-- 状态栏 -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px 0;font-size:12px;color:rgba(0,0,0,.7);">
+<span style="font-weight:600;">2:36</span><span>📶 🔋</span>
+</div>
+<!-- 标题栏 -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px 8px;">
+<span style="font-size:24px;font-weight:600;color:#000;">10月16日 周五</span>
+<div style="display:flex;gap:8px;">
+<div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#333;">+</div>
+<div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;">⋮</div>
+</div>
+</div>
+<!-- 内容区 -->
+<div style="background:#fff;border-radius:20px;margin:4px 8px;padding:40px 16px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;">
+<div style="font-size:48px;margin-bottom:16px;">☀️</div>
+<div style="font-size:17px;font-weight:500;color:#000;">今天没有待处理事项</div>
+<div style="font-size:14px;color:rgba(0,0,0,.4);margin-top:6px;">享受轻松的一天吧</div>
+<div style="margin-top:24px;padding:10px 24px;background:#3482FF;border-radius:10px;font-size:14px;color:#fff;font-weight:500;">+ 创建日程</div>
+<div style="margin-top:32px;text-align:left;width:100%;padding:0 8px;">
+<div style="font-size:12px;color:rgba(0,0,0,.35);margin-bottom:8px;">明日预告</div>
+<div style="background:rgba(0,0,0,.03);border-radius:10px;padding:12px;font-size:14px;color:rgba(0,0,0,.6);">09:00 产品周会 · 线上</div>
+</div>
+</div>
+<!-- 底部Tab栏 -->
+<div style="display:flex;justify-content:center;align-items:center;padding:12px 16px 28px;background:#f3f3f3;margin-top:auto;flex-shrink:0;">
+<div style="display:flex;align-items:center;background:#fff;border-radius:100px;padding:6px 8px;">
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">年</div>
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">月</div>
+<div style="text-align:center;padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;font-weight:500;">周</div>
+<div style="text-align:center;padding:8px 20px;background:rgba(0,0,0,.06);border-radius:100px;font-size:13px;font-weight:600;color:#000;">日</div>
+</div>
+</div>
+</div>
+
+<!-- 设计说明 -->
+<div style="max-width:360px;min-width:300px;">
+<div class="design-note" style="margin-top:0;">
+<h5>页面结构</h5>
+<p><b>标题栏：</b>日期+操作按钮<br><b>重要事项：</b>红底（紧急）→ 黄底（截止）<br><b>今日日程：</b>蓝色圆点+标题+副文本<br><b>底部Tab：</b>年/月/周/日，不动</p>
+</div>
+<div class="design-note" style="margin-top:12px;">
+<h5>空状态</h5>
+<p>无日程+无重要事项时：<br>• 居中 emoji + "今天没有待处理事项"<br>• "创建日程"按钮引导使用习惯<br>• 底部"明日预告"确保不空白</p>
+</div>
+</div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 06 可交互 Demo ===== -->
+<div class="section">
+<div class="section-num">04</div>
+<div class="section-title">可交互 Demo</div>
+<p style="font-size:15px;color:#888;margin-bottom:20px;">点击按钮切换页面。页面内卡片可点击跳转，体验完整链路。</p>
+
+<div style="display:flex;gap:24px;align-items:flex-start;justify-content:center;">
+<div>
+<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+<button class="demo-btn active" onclick="goDemo('lock',this)">锁屏</button>
+<button class="demo-btn" onclick="goDemo('desktop',this)">桌面</button>
+<button class="demo-btn" onclick="goDemo('minus',this)">负一屏</button>
+<button class="demo-btn" onclick="goDemo('month',this)">月视图</button>
+<button class="demo-btn" onclick="goDemo('day',this)">日视图 ★</button>
+
+</div>
+<div id="dp" style="width:392px;height:851px;border-radius:51px;overflow:hidden;position:relative;"></div>
+</div>
+<div style="max-width:300px;">
+<div class="card"><h4 id="dt">锁屏</h4><p id="dd">点击通知卡片跳转日视图</p></div>
+</div>
+</div>
+</div>
+
+<script>
+function goDemo(id, btn) {
+  var phone = document.getElementById('dp');
+  var dt = document.getElementById('dt');
+  var dd = document.getElementById('dd');
+  document.querySelectorAll('.demo-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn) btn.classList.add('active');
+
+  if (id === 'lock') {
+    phone.style.background = 'url(assets/figma-0.png) center/cover';
+    phone.innerHTML = '<div onclick="goDemo(\'day\')" style="position:absolute;top:320px;left:16px;right:16px;background:rgba(0,0,0,.5);border-radius:20px;padding:16px 20px;backdrop-filter:blur(20px);text-align:left;cursor:pointer;" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><div style="width:22px;height:22px;background:linear-gradient(135deg,#3482FF,#5856d6);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;">🔔</div><span style="font-size:13px;color:rgba(255,255,255,.5);">小爱建议 · 3件事</span></div><div style="font-size:16px;color:#fff;line-height:1.5;">航班延误40分钟 · 信用卡今日到期 · 14点建议提前出发</div><div style="font-size:12px;color:rgba(255,255,255,.35);margin-top:6px;">点击查看详情 →</div></div>';
+    dt.textContent='锁屏 · 单条摘要通知'; dd.textContent='点击通知卡片 → 跳转日视图';
+  }
+  else if (id === 'desktop') {
+    phone.style.background = 'url(assets/figma-1.png) center/cover';
+    phone.innerHTML = '<div onclick="goDemo(\'day\')" style="position:absolute;top:480px;left:16px;right:16px;background:rgba(255,255,255,.88);border-radius:22px;padding:18px 20px;backdrop-filter:blur(12px);text-align:left;cursor:pointer;" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'"><div style="font-size:14px;color:#3482FF;font-weight:500;margin-bottom:10px;">🧠 小爱建议 · 重要事项</div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;"><div style="width:8px;height:8px;background:#ff3b30;border-radius:50%;"></div><span style="font-size:16px;color:#000;">航班MU2805延误40分钟</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;"><div style="width:8px;height:8px;background:#ff9500;border-radius:50%;"></div><span style="font-size:16px;color:#000;">信用卡还款今日截止 ¥3,280</span></div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;"><div style="width:8px;height:8px;background:#34c759;border-radius:50%;"></div><span style="font-size:16px;color:#000;">14:00客户会议，路程45分钟</span></div></div>';
+    dt.textContent='桌面 · AI建议卡'; dd.textContent='点击建议卡 → 跳转日视图';
+  }
+  else if (id === 'minus') {
+    phone.style.background = 'url(assets/飞机.png) center/cover';
+    phone.innerHTML = '<div onclick="goDemo(\'day\')" style="position:absolute;top:300px;left:16px;right:16px;background:rgba(255,255,255,.92);border-radius:24px;padding:22px;backdrop-filter:blur(16px);text-align:left;cursor:pointer;" onmouseover="this.style.transform=\'scale(1.01)\'" onmouseout="this.style.transform=\'scale(1)\'"><div style="font-size:15px;font-weight:500;color:rgba(0,0,0,.45);margin-bottom:16px;">重要事项</div><div style="padding-bottom:16px;border-bottom:1px solid rgba(0,0,0,.06);"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:13px;background:#ff3b30;color:#fff;padding:3px 10px;border-radius:5px;">紧急</span><span style="font-size:13px;color:rgba(0,0,0,.3);">08:15</span></div><div style="font-size:18px;font-weight:600;color:#000;margin-top:8px;">航班MU2805状态变更</div><div style="font-size:15px;color:rgba(0,0,0,.5);margin-top:5px;">延误40分钟，新到达10:05</div></div><div style="padding:16px 0;border-bottom:1px solid rgba(0,0,0,.06);"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:13px;background:#ff9500;color:#fff;padding:3px 10px;border-radius:5px;">今日截止</span><span style="font-size:13px;color:rgba(0,0,0,.3);">银行</span></div><div style="font-size:18px;font-weight:600;color:#000;margin-top:8px;">招行信用卡还款</div><div style="font-size:15px;color:rgba(0,0,0,.5);margin-top:5px;">¥3,280，今日24:00前</div></div><div style="padding-top:16px;"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:13px;background:#34c759;color:#fff;padding:3px 10px;border-radius:5px;">建议</span><span style="font-size:13px;color:rgba(0,0,0,.3);">日程</span></div><div style="font-size:18px;font-weight:600;color:#000;margin-top:8px;">14:00 会议出行建议</div><div style="font-size:15px;color:rgba(0,0,0,.5);margin-top:5px;">德基广场18km，建议13:15出发</div></div></div>';
+    dt.textContent='负一屏 · 事项卡片'; dd.textContent='点击任一事项 → 跳转日视图';
+  }
+  else if (id === 'month') {
+    phone.style.background = '#fff';
+    phone.innerHTML = '<div style="position:absolute;inset:0;background:#fff;border-radius:51px;overflow-y:auto;text-align:left;padding:50px 20px 20px;"><div style="font-size:24px;font-weight:700;color:#111;margin-bottom:16px;">10月</div><div style="display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:8px;text-align:center;font-size:11px;color:rgba(0,0,0,.4);"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:20px;text-align:center;font-size:14px;color:#333;"><span style="padding:10px 0;color:#ccc;">28</span><span style="padding:10px 0;color:#ccc;">29</span><span style="padding:10px 0;color:#ccc;">30</span><span style="padding:10px 0;color:#e53935;">1</span><span style="padding:10px 0;">2</span><span style="padding:10px 0;">3</span><span style="padding:10px 0;">4</span><span style="padding:10px 0;">5</span><span style="padding:10px 0;">6</span><span style="padding:10px 0;">7</span><span style="padding:10px 0;">8</span><span style="padding:10px 0;">9</span><span style="padding:10px 0;">10</span><span style="padding:10px 0;">11</span><span style="padding:10px 0;">12</span><span style="padding:10px 0;">13</span><span style="padding:10px 0;">14</span><span style="padding:10px 0;">15</span><span onclick="goDemo(\'day\')" style="padding:10px 0;background:#3482FF;color:#fff;border-radius:10px;cursor:pointer;">16</span><span style="padding:10px 0;color:#3482FF;">17</span><span style="padding:10px 0;color:#3482FF;">18</span><span style="padding:10px 0;">19</span><span style="padding:10px 0;">20</span><span style="padding:10px 0;">21</span><span style="padding:10px 0;">22</span><span style="padding:10px 0;">23</span><span style="padding:10px 0;">24</span><span style="padding:10px 0;">25</span><span style="padding:10px 0;">26</span><span style="padding:10px 0;">27</span><span style="padding:10px 0;">28</span><span style="padding:10px 0;">29</span><span style="padding:10px 0;">30</span><span style="padding:10px 0;">31</span></div><div onclick="goDemo(\'day\')" style="background:linear-gradient(135deg,#f0f7ff,#e8f0fe);border-radius:16px;padding:14px;margin-bottom:12px;border:1px solid rgba(52,130,255,.12);cursor:pointer;" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'"><div style="font-size:12px;color:#3482FF;font-weight:500;margin-bottom:4px;">🧠 AI 今日建议</div><div style="font-size:14px;color:#000;line-height:1.5;">今天3件事需注意：航班延误、信用卡到期、14点会议建议提前</div><div style="font-size:11px;color:#3482FF;margin-top:6px;">查看详情 →</div></div><div style="background:#f8f8f8;border-radius:16px;padding:14px;border:1px dashed #ddd;font-size:12px;color:#666;">📅 发现1条新日程 · MU2805 南京-成都</div></div>';
+    dt.textContent='月视图 · AI建议卡'; dd.textContent='点击AI建议卡或日期16 → 跳转日视图';
+  }
+  else if (id === 'day') {
+    phone.style.background = '#f3f3f3';
+    phone.innerHTML = '<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#f3f3f3;border-radius:51px;overflow:hidden;text-align:left;"><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px 0;font-size:12px;color:rgba(0,0,0,.7);"><span style="font-weight:600;">2:36</span><span>📶 🔋</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px 8px;"><span style="font-size:24px;font-weight:600;color:#000;">10月16日 周五</span><div style="display:flex;gap:8px;"><div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:#333;">+</div><div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;">⋮</div></div></div><div style="background:#fff;border-radius:20px;margin:4px 8px;padding:16px;flex:1;overflow-y:auto;"><div style="margin-bottom:14px;"><div style="font-size:14px;font-weight:500;color:#d32f2f;margin-bottom:10px;">⚡ 重要事项</div><div onclick="goDemo(\'detail\')" style="background:#FFF5F5;border:1px solid #FFCDD2;border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;" onmouseover="this.style.background=\'#FFEBEE\'" onmouseout="this.style.background=\'#FFF5F5\'"><div style="font-size:10px;color:#d32f2f;">🔴 紧急 · 短信</div><div style="font-size:15px;font-weight:500;color:#000;margin-top:4px;">航班MU2805延误40分钟</div><div style="font-size:12px;color:rgba(0,0,0,.5);margin-top:3px;">新预计到达10:05 <span style="color:#3482FF;">详情→</span></div></div><div style="background:#FFFDE7;border:1px solid #FFF9C4;border-radius:12px;padding:12px;"><div style="font-size:10px;color:#e65100;">🟡 今日截止 · 短信</div><div style="font-size:15px;font-weight:500;color:#000;margin-top:4px;">招行信用卡还款 ¥3,280</div><div style="font-size:12px;color:rgba(0,0,0,.5);margin-top:3px;">24:00前 <span style="color:#3482FF;">去还款→</span></div></div></div><div style="height:1px;background:rgba(0,0,0,.06);margin-bottom:14px;"></div><div><div style="font-size:13px;font-weight:500;color:rgba(0,0,0,.4);margin-bottom:10px;">今日日程</div><div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);"><div style="width:6px;height:6px;background:#3482FF;border-radius:50%;margin-top:7px;"></div><div><div style="font-size:15px;font-weight:500;color:#000;">项目宣贯会</div><div style="font-size:12px;color:rgba(0,0,0,.5);">16:00-17:00 | 2小时后</div></div></div><div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04);"><div style="width:6px;height:6px;background:#3482FF;border-radius:50%;margin-top:7px;"></div><div><div style="font-size:15px;font-weight:500;color:#000;">客户拜访·德基广场</div><div style="font-size:12px;color:rgba(0,0,0,.5);">14:00-15:30 | <span style="color:#3482FF;">建议13:15出发</span></div></div></div><div style="display:flex;gap:10px;padding:10px 0;"><div style="width:6px;height:6px;background:#34c759;border-radius:50%;margin-top:7px;"></div><div><div style="font-size:15px;font-weight:500;color:#000;">明基医院看牙</div><div style="font-size:12px;color:rgba(0,0,0,.5);">16:30-17:30 | <span style="color:#e65100;">⚠️ 间隔紧</span></div></div></div></div></div><div style="display:flex;justify-content:center;padding:12px 16px 28px;margin-top:auto;"><div style="display:flex;background:#fff;border-radius:100px;padding:6px 8px;"><div style="padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;">年</div><div style="padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;">月</div><div style="padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;">周</div><div style="padding:8px 20px;background:rgba(0,0,0,.06);border-radius:100px;font-size:13px;font-weight:600;">日</div></div></div></div>';
+    dt.textContent='日视图 ★ 核心落地页'; dd.textContent='点击红色事项卡片 → 展开详情';
+  }
+  else if (id === 'detail') {
+    phone.style.background = '#fff';
+    phone.innerHTML = '<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;border-radius:51px;overflow:hidden;text-align:left;">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;padding:14px 28px 0;font-size:14px;color:#000;"><span style="font-weight:600;">2:36</span><span style="font-size:12px;color:#333;">●●● WiFi 🔋</span></div>'
+    +'<div style="padding:20px 20px 12px;"><span onclick="goDemo(\'day\')" style="font-size:28px;color:#000;cursor:pointer;font-weight:300;">‹</span></div>'
+    +'<div style="flex:1;overflow-y:auto;padding:0 0 20px;">'
+    +'<div style="margin:0 16px 12px;background:#f7f8fa;border-radius:16px;padding:18px 20px;"><div style="font-size:20px;font-weight:700;color:#000;">MU2805 南京-成都</div><div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:6px;">10月16日  周五</div><div style="font-size:14px;color:rgba(0,0,0,.5);margin-top:2px;">08:25-11:25</div></div>'
+    +'<div style="margin:0 16px 12px;background:#f7f8fa;border-radius:16px;padding:18px 20px;"><div style="font-size:17px;font-weight:600;color:#000;">南京禄口国际机场 T2</div><div style="font-size:14px;color:rgba(0,0,0,.45);margin-top:6px;">据您当前位置32km，驾车约45分钟</div><div style="display:flex;gap:12px;justify-content:flex-end;margin-top:14px;"><span style="padding:8px 20px;border:1px solid rgba(0,0,0,.12);border-radius:20px;font-size:14px;color:#000;font-weight:500;">导航</span><span style="padding:8px 20px;border:1px solid rgba(0,0,0,.12);border-radius:20px;font-size:14px;color:#000;font-weight:500;">打车</span></div></div>'
+    +'<div style="margin:0 16px;border-top:1px solid rgba(0,0,0,.06);"></div>'
+    +'<div style="padding:16px 20px;margin:0 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;color:#000;">提醒</span><span style="font-size:14px;color:rgba(0,0,0,.45);">日程开始时 ›</span></div>'
+    +'<div style="padding:0 20px 16px;margin:0 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;color:#000;">闹钟提醒</span><div style="width:44px;height:26px;background:#3482FF;border-radius:13px;position:relative;"><div style="width:22px;height:22px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;box-shadow:0 1px 3px rgba(0,0,0,.2);"></div></div></div>'
+    +'<div style="margin:0 16px;border-top:1px solid rgba(0,0,0,.06);"></div>'
+    +'<div style="padding:16px 20px;margin:0 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;color:#000;">日历</span><span style="font-size:14px;color:rgba(0,0,0,.45);">小米日历 ›</span></div>'
+    +'<div style="margin:0 16px;border-top:1px solid rgba(0,0,0,.06);"></div>'
+    +'<div style="padding:16px 20px;margin:0 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;color:#000;">航站楼</span><span style="font-size:14px;color:rgba(0,0,0,.45);">T2</span></div>'
+    +'<div style="padding:0 20px 16px;margin:0 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;color:#000;">座位</span><span style="font-size:14px;color:rgba(0,0,0,.45);">32A 靠窗</span></div>'
+    +'<div style="padding:12px 20px;margin:0 16px;"><span style="font-size:13px;color:rgba(0,0,0,.3);">识别来源：短信</span></div>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:center;gap:32px;padding:12px 0 36px;border-top:1px solid rgba(0,0,0,.06);"><div style="text-align:center;"><div style="width:44px;height:44px;background:rgba(0,0,0,.05);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-size:18px;">✏️</div><div style="font-size:12px;color:rgba(0,0,0,.5);">编辑</div></div><div style="text-align:center;"><div style="width:44px;height:44px;background:rgba(0,0,0,.05);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-size:18px;">🗑</div><div style="font-size:12px;color:rgba(0,0,0,.5);">删除</div></div></div>'
+    +'</div>';
+    dt.textContent='日程详情页'; dd.textContent='点击 ‹ 返回日视图';
+  }
+  else if (id === 'DISABLED_empty') {
+    phone.style.background = '#f3f3f3';
+    phone.innerHTML = '<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#f3f3f3;border-radius:51px;overflow:hidden;"><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px 0;font-size:12px;color:rgba(0,0,0,.7);"><span style="font-weight:600;">2:36</span><span>📶 🔋</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px 8px;"><span style="font-size:24px;font-weight:600;color:#000;">10月16日 周五</span><div style="display:flex;gap:8px;"><div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;">+</div><div style="width:36px;height:36px;background:rgba(0,0,0,.05);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">⋮</div></div></div><div style="background:#fff;border-radius:20px;margin:4px 8px;padding:40px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;"><div style="font-size:48px;margin-bottom:16px;">☀️</div><div style="font-size:17px;font-weight:500;color:#000;">今天没有待处理事项</div><div style="font-size:14px;color:rgba(0,0,0,.4);margin-top:6px;">享受轻松的一天吧</div><div style="margin-top:24px;padding:10px 24px;background:#3482FF;border-radius:10px;font-size:14px;color:#fff;font-weight:500;">+ 创建日程</div><div style="margin-top:32px;text-align:left;width:100%;padding:0 8px;"><div style="font-size:12px;color:rgba(0,0,0,.35);margin-bottom:8px;">明日预告</div><div style="background:rgba(0,0,0,.03);border-radius:10px;padding:12px;font-size:14px;color:rgba(0,0,0,.6);">09:00 产品周会 · 线上</div></div></div><div style="display:flex;justify-content:center;padding:12px 16px 28px;margin-top:auto;"><div style="display:flex;background:#fff;border-radius:100px;padding:6px 8px;"><div style="padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;">年</div><div style="padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;">月</div><div style="padding:8px 20px;color:rgba(0,0,0,.35);font-size:13px;">周</div><div style="padding:8px 20px;background:rgba(0,0,0,.06);border-radius:100px;font-size:13px;font-weight:600;">日</div></div></div></div>';
+    dt.textContent='日视图 · 空状态'; dd.textContent='无事项时展示天气+创建按钮+明日预告';
+  }
+}
+goDemo('lock',document.querySelector('.demo-btn'));
+</script>
+
+
+<hr class="divider">
+
+<!-- ===== 07 跳转逻辑 ===== -->
+<div class="section">
+<div class="section-num">05</div>
+<div class="section-title">跳转逻辑</div>
+<div style="text-align:center;">
+<div class="flow-row">
+<div class="flow-node">🔒 锁屏岛</div>
+<div class="flow-node">🏠 桌面AI卡</div>
+<div class="flow-node">📱 负一屏</div>
+<div class="flow-node">📅 月视图AI卡</div>
+</div>
+<div style="margin:14px 0;color:#555;font-size:16px;">↓ 点击 ↓</div>
+<div class="flow-row">
+<div class="flow-node blue" style="font-size:15px;padding:16px 24px;">📋 日历 · 日视图改造页<br><span style="font-size:13px;color:#888;">今日全部日程 + AI分析 + 重要事项（唯一落地页）</span></div>
+</div>
+<div style="margin:14px 0;color:#555;font-size:16px;">↓ 点击单条展开 ↓</div>
+<div class="flow-row">
+<div class="flow-node">📍 日程详情<br><span style="font-size:12px;color:#888;">地点+导航/打车</span></div>
+<div class="flow-node">📋 事项详情<br><span style="font-size:12px;color:#888;">AI分析+操作建议</span></div>
+</div>
+</div>
+<div class="design-note" style="margin-top:20px;">
+<h5>为什么统一到日视图</h5>
+<p>所有入口统一落地到日历日视图，而非分散到不同页面。好处：1）用户心智统一——"重要的事都在日历里"；2）日视图作为信息汇聚页，同时展示日程+非日程事项，用户一屏处理完；3）避免新增独立App/页面的学习成本。</p>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 08 完整推送策略规则 ===== -->
+<div class="section">
+<div class="section-num">06</div>
+<div class="section-title">完整推送策略规则</div>
+<p style="font-size:15px;color:#888;margin-bottom:24px;">本章是推送系统的完整规则定义，供开发和测试对齐。</p>
+
+<!-- 6.1 推送时机 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.1 推送时机</div>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
+<thead><tr style="border-bottom:1px solid #3a3a3e;">
+<th style="text-align:left;padding:10px;color:#74b9ff;">时段</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">时间</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">推送内容</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">设计意图</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">早间</td><td style="padding:10px;">07:30</td><td style="padding:10px;">今天的全部日程概览 + 昨晚以来未处理的重要信息（欠费/快递/未接来电）</td><td style="padding:10px;">帮用户规划一天</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">午间</td><td style="padding:10px;">12:00</td><td style="padding:10px;">下午需要行动的事项（出行建议/即将截止/上午新增的重要信息）</td><td style="padding:10px;">帮用户决策下午</td></tr>
+<tr><td style="padding:10px;">晚间</td><td style="padding:10px;">20:00</td><td style="padding:10px;">未完成事项汇总 + 明日第一件事预告</td><td style="padding:10px;">收尾 + 安心入睡</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 6.2 数据扫描范围 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.2 数据扫描范围</div>
+<p style="font-size:15px;color:#ccc;margin-bottom:12px;">每次推送前触发一次扫描：</p>
+<div class="row">
+<div class="card col">
+<h4>往回看</h4>
+<p>自上一次推送以来所有新增/未处理的信息：短信、未接来电、日历变更、天气预警</p>
+</div>
+<div class="card col">
+<h4>往前看</h4>
+<p>到下一次推送时间点之前需要行动的事项：<br>• 早间 → 看全天<br>• 午间 → 看到晚间（20:00）<br>• 晚间 → 看到明天早间（07:30）</p>
+</div>
+</div>
+</div>
+
+<!-- 6.3 优先级与选取 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.3 优先级与选取</div>
+<p style="font-size:15px;color:#ccc;margin-bottom:12px;">每次推送最多展示 <b style="color:#fff;">3条</b>（"重要三件事"），按优先级从高到低选取：</p>
+<div class="priority-grid">
+<div class="pri-card high">
+<div class="pri-title" style="color:#ff6b6b;">🔴 高 = 不可逆损失</div>
+<div class="pri-desc">有多少展示多少（不受3条限制）</div>
+<div class="pri-examples">航班取消/延误<br>逾期停机<br>协议签署截止</div>
+</div>
+<div class="pri-card mid">
+<div class="pri-title" style="color:#ffb347;">🟡 中 = 有时间窗但会误事</div>
+<div class="pri-desc">高优占完后按紧迫程度填充</div>
+<div class="pri-examples">还款到期<br>会议出行建议<br>就医挂号提醒</div>
+</div>
+<div class="pri-card low">
+<div class="pri-title" style="color:#5cd67b;">🟢 低 = 知道更好但不急</div>
+<div class="pri-desc">仅高+中不足3条时露出</div>
+<div class="pri-examples">快递到柜<br>降价通知<br>天气变化</div>
+</div>
+</div>
+<div class="design-note" style="margin-top:12px;">
+<h5>超过3条时</h5>
+<p>通知摘要显示"今天有5件事需关注"，点击进入日视图看完整列表。日视图内不限条数，全部展示。</p>
+</div>
+</div>
+
+<!-- 6.4 推送条件 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.4 推送条件</div>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
+<thead><tr style="border-bottom:1px solid #3a3a3e;">
+<th style="text-align:left;padding:10px;color:#74b9ff;">条件</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">规则</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">正常推送</td><td style="padding:10px;">到固定时间点、存在 ≥1 条有效事项</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">跳过推送</td><td style="padding:10px;">本时段所有事项过滤后为 0 条（不推空卡片）</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">延后推送</td><td style="padding:10px;">勿扰模式开启中 → 勿扰结束后立即补推一次</td></tr>
+<tr><td style="padding:10px;">用户可配</td><td style="padding:10px;">设置页可关闭任一时段；可调整时间（±1小时）；可关闭整个功能</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 6.5 通知去重 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.5 通知去重</div>
+<div class="design-note" style="margin-top:0;margin-bottom:16px;">
+<h5>核心判断标准</h5>
+<p>不是"这个事件出现过没有"，而是——<b>这次出现能让用户多知道什么或多做什么？</b></p>
+</div>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
+<thead><tr style="border-bottom:1px solid #3a3a3e;">
+<th style="text-align:left;padding:10px;color:#74b9ff;">场景</th>
+<th style="text-align:center;padding:10px;color:#74b9ff;">是否推</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">原因</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">早间提到"下午3点有会" → 午间又提到同一个会</td><td style="padding:10px;text-align:center;color:#34c759;">✅ 推</td><td style="padding:10px;">午间新增了"建议2:15出发"，有增量信息</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">午间提到"下午3点有会" → 14:45 日历原生弹提醒</td><td style="padding:10px;text-align:center;color:#34c759;">✅ 推</td><td style="padding:10px;">不同时间、不同目的（规划 vs 执行）</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">14:45 重要三件事弹通知 → 14:46 日历也弹通知</td><td style="padding:10px;text-align:center;color:#ff3b30;">❌ 合并</td><td style="padding:10px;">同一5分钟窗口同一事件，保留信息量大的那条</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">早间推了"航班正常" → 9点航班延误了</td><td style="padding:10px;text-align:center;color:#34c759;">✅ 推</td><td style="padding:10px;">状态变化 = 新信息，触发即时推送</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">早间推了"快递到柜" → 午间用户还没取</td><td style="padding:10px;text-align:center;color:#ff3b30;">❌ 不推</td><td style="padding:10px;">没有新信息，用户只是还没行动</td></tr>
+<tr><td style="padding:10px;">午间推了"还款今日到期" → 晚间仍未还</td><td style="padding:10px;text-align:center;color:#34c759;">✅ 推</td><td style="padding:10px;">紧迫度升级了（距截止更近），晚间汇总应再提</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card" style="margin-top:12px;">
+<h4>事项唯一标识规则</h4>
+<p><code style="background:#2a2b2e;padding:2px 6px;border-radius:3px;">{source}_{关键词}_{日期}_{状态}</code><br><br>• 同一 ID + 同一状态，在同一推送时段内只出现一次<br>• 状态变化 → 生成新 ID → 可以再次推送<br>• 事项可持续存在于日视图页面（被动展示不受去重限制）</p>
+</div>
+</div>
+
+<!-- 6.6 触达方式 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.6 触达方式</div>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
+<thead><tr style="border-bottom:1px solid #3a3a3e;">
+<th style="text-align:left;padding:10px;color:#74b9ff;">入口</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">形态</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">用户场景</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">锁屏</td><td style="padding:10px;">单条摘要通知（🔴高优先级时升级为岛展开）</td><td style="padding:10px;">拿起手机第一眼</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">负一屏</td><td style="padding:10px;">独立卡片列表，逐条可操作</td><td style="padding:10px;">主动下滑查看</td></tr>
+<tr><td style="padding:10px;">日历月视图</td><td style="padding:10px;">AI建议卡（一句话摘要）</td><td style="padding:10px;">打开日历时顺带看到</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:15px;color:#999;margin-top:10px;">所有入口点击 → 统一跳转 <b style="color:#fff;">日历日视图改造页</b>（唯一落地页）。</p>
+</div>
+
+<!-- 6.7 静默规则 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.7 静默规则</div>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
+<thead><tr style="border-bottom:1px solid #3a3a3e;">
+<th style="text-align:left;padding:10px;color:#74b9ff;">场景</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">处理</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">勿扰模式开启中</td><td style="padding:10px;">延后到勿扰结束后立即补推</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">用户正在通话中</td><td style="padding:10px;">延后到通话结束后5分钟</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">用户刚点击了推送（5分钟内）</td><td style="padding:10px;">下一时段正常推，不跳过</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">用户标记了"不相关"</td><td style="padding:10px;">同类事项置信度降低，连续3次后该类不再主动推</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">连续3天推送均无事项</td><td style="padding:10px;">降频为仅早间推送</td></tr>
+<tr><td style="padding:10px;">连续7天无互动</td><td style="padding:10px;">暂停推送，下次打开日历时恢复</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 6.8 即时推送 -->
+<div style="margin-bottom:32px;">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.8 即时推送（例外规则）</div>
+<p style="font-size:15px;color:#ccc;margin-bottom:12px;">以下场景<b style="color:#ff6b6b;">不等到下一个时间点</b>，直接即时推送：</p>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
+<thead><tr style="border-bottom:1px solid #3a3a3e;">
+<th style="text-align:left;padding:10px;color:#74b9ff;">触发场景</th>
+<th style="text-align:left;padding:10px;color:#74b9ff;">说明</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">航班/火车取消或延误</td><td style="padding:10px;">损失不可逆，1分钟都不能等</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">同一号码连续3次未接来电</td><td style="padding:10px;">可能是紧急联系人</td></tr>
+<tr><td style="padding:10px;">协作日程被他人修改时间</td><td style="padding:10px;">可能导致迟到或冲突</td></tr>
+</tbody>
+</table>
+</div>
+<div class="design-note" style="margin-top:12px;">
+<h5>即时推送限流</h5>
+<p>复用日历通知渠道，不新建 channel。每天即时推送上限 <b>3条</b>，防止极端情况下刷屏。超过3条时剩余的并入下一个固定时段推送。</p>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
