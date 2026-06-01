@@ -840,29 +840,6 @@ goDemo('lock',document.querySelector('.demo-btn'));
 </div>
 </div>
 
-<!-- 6.8 即时推送 -->
-<div style="margin-bottom:32px;">
-<div style="font-size:18px;font-weight:600;margin-bottom:12px;">6.8 即时推送（例外规则）</div>
-<p style="font-size:15px;color:#ccc;margin-bottom:12px;">以下场景<b style="color:#ff6b6b;">不等到下一个时间点</b>，直接即时推送：</p>
-<div style="overflow-x:auto;">
-<table style="width:100%;border-collapse:collapse;font-size:14px;color:#ddd;">
-<thead><tr style="border-bottom:1px solid #3a3a3e;">
-<th style="text-align:left;padding:10px;color:#74b9ff;">触发场景</th>
-<th style="text-align:left;padding:10px;color:#74b9ff;">说明</th>
-</tr></thead>
-<tbody>
-<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">航班/火车取消或延误</td><td style="padding:10px;">损失不可逆，1分钟都不能等</td></tr>
-<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">同一号码连续3次未接来电</td><td style="padding:10px;">可能是紧急联系人</td></tr>
-<tr><td style="padding:10px;">协作日程被他人修改时间</td><td style="padding:10px;">可能导致迟到或冲突</td></tr>
-</tbody>
-</table>
-</div>
-<div class="design-note" style="margin-top:12px;">
-<h5>即时推送限流</h5>
-<p>复用日历通知渠道，不新建 channel。每天即时推送上限 <b>3条</b>，防止极端情况下刷屏。超过3条时剩余的并入下一个固定时段推送。</p>
-</div>
-</div>
-
 </div>
 
 </body>
