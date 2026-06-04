@@ -174,7 +174,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="row" style="margin-top:16px;">
 <div class="card col">
 <h4>生成与推送时机</h4>
-<p><b style="color:#fff;">每天早晨固定时段生成</b>（默认 07:30 前后，跟随用户起床/解锁时机微调）<br>生成后通过锁屏通知、桌面"小爱建议"卡、负一屏多触点同步触达<br>当日无任何日程/待办时，仅保留天气 + 资讯，不推空卡</p>
+<p><b style="color:#fff;">每天早晨固定时段生成</b>（默认 <b style="color:#fff;">06:30</b> 推送，跟随用户起床/解锁时机微调）<br><span style="color:#999;">依据：闹钟打点显示起床闹铃最高频集中在 07:00，故 06:30 推送，保证用户起床时早报内容已就位、第一眼即可见。</span><br>生成后通过锁屏通知、桌面"小爱建议"卡、负一屏多触点同步触达<br>当日无任何日程/待办时，仅保留天气 + 资讯，不推空卡</p>
 </div>
 <div class="card col">
 <h4>与「今日事项」的边界</h4>
@@ -754,7 +754,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="row" style="margin-bottom:16px;">
 <div class="card col">
 <h4>推送时机（第一期：固定三次）</h4>
-<p><b style="color:#fff;">早间 07:30</b> — 今日全部事项概览 + 优先级标注 + 昨晚新增的未处理信息<br><b style="color:#fff;">午间 12:00</b> — 下午事项更新（出发建议 / 新增变更 / 即将截止）<br><b style="color:#fff;">晚间 20:00</b> — 未完成事项汇总 + 明日预告</p>
+<p><b style="color:#fff;">早间 06:30</b> — 今日全部事项概览 + 优先级标注 + 昨晚新增的未处理信息<br><b style="color:#fff;">午间 12:00</b> — 下午事项更新（出发建议 / 新增变更 / 即将截止）<br><b style="color:#fff;">晚间 20:00</b> — 未完成事项汇总 + 明日预告</p>
 </div>
 <div class="card col">
 <h4>核心去重原则</h4>
@@ -884,7 +884,7 @@ goDemo('lock',document.querySelector('.demo-btn'));
 <th style="text-align:left;padding:10px;color:#74b9ff;">设计意图</th>
 </tr></thead>
 <tbody>
-<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">早间</td><td style="padding:10px;">07:30</td><td style="padding:10px;">今日全部事项（优先级排序）+ 昨晚新增未处理信息</td><td style="padding:10px;">一屏总览今天所有事</td></tr>
+<tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">早间</td><td style="padding:10px;">06:30</td><td style="padding:10px;">今日全部事项（优先级排序）+ 昨晚新增未处理信息</td><td style="padding:10px;">一屏总览今天所有事</td></tr>
 <tr style="border-bottom:1px solid #2a2b2e;"><td style="padding:10px;">午间</td><td style="padding:10px;">12:00</td><td style="padding:10px;">事项状态更新（新增变更/出行建议/即将截止）</td><td style="padding:10px;">刷新下午安排</td></tr>
 <tr><td style="padding:10px;">晚间</td><td style="padding:10px;">20:00</td><td style="padding:10px;">未完成事项汇总 + 明日预告</td><td style="padding:10px;">收尾 + 安心入睡</td></tr>
 </tbody>
