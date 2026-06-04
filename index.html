@@ -271,7 +271,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <img src="assets/zaobao-detail.png" style="width:340px;border-radius:28px;box-shadow:0 8px 40px rgba(0,0,0,.3);display:block;">
 </div>
 <div style="flex:1;">
-<div style="font-size:16px;font-weight:600;margin-bottom:83px;color:#74b9ff;">逐板块拆解（构成 + Miclaw 实测效果）</div>
+<div style="font-size:16px;font-weight:600;margin-bottom:18px;color:#74b9ff;">逐板块拆解</div>
 
 <!-- 问候语 -->
 <div class="card" style="margin-bottom:14px;border-left:3px solid #007aff;position:relative;">
@@ -284,15 +284,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="card" style="margin-bottom:14px;border-left:3px solid #4a90d9;position:relative;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#4a90d9;font-size:18px;">←</span> ① 天气</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
-<p style="margin-bottom:12px;"><b style="color:#fff;">天气摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">天气卡</b>。出门前最先要决策的就是穿衣带伞，故置顶。</p>
-<div style="font-size:13px;color:#f5a623;font-weight:600;margin-bottom:6px;">Miclaw 实测效果</div>
-<div style="font-size:12px;color:#888;margin-bottom:10px;">覆盖 4 种天气态实测：天晴高温、下雨、雾霾、大雪。</div>
-<div style="border:1px solid #2a4a2e;border-radius:8px;padding:12px 14px;font-size:13px;color:#bbb;line-height:1.7;background:#16201a;">
-<div style="color:#8ed99a;font-weight:600;margin-bottom:3px;">做得好</div>
-<div style="margin-bottom:8px;">· 能按不同天气态生成对应的卡片样式与提醒（高温防晒、降雨带伞、雾霾口罩、大雪防滑）<br>· 摘要一句话点明今天最影响行动的天气决策，温度 / 空气质量 / 逐时 / 一周高低温完整呈现</div>
-<div style="color:#ff9f6b;font-weight:600;margin-bottom:3px;">存在问题</div>
-<div>· 极端天气下的提醒文案仍偏模板化，未结合用户当天具体出行日程做个性化叮嘱</div>
-</div>
+<p><b style="color:#fff;">天气摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">天气卡</b>。出门前最先要决策的就是穿衣带伞，故置顶。</p>
 </div>
 
 <!-- 今日日程 -->
@@ -300,56 +292,20 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#e65100;font-size:18px;">←</span> ② 今日日程</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
 <p style="margin-bottom:12px;"><b style="color:#fff;">今日事件摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">日程展示</b> <b style="color:#888;">＋</b> <b style="color:#fff;">冲突提醒</b> <b style="color:#888;">＋</b> <b style="color:#fff;">快捷操作</b>。当天必须赴约的硬性安排，紧随天气。<br><span style="color:#999;">快捷操作遵循"<b style="color:#bbb;">点了能帮用户规划今天</b>"原则（早报清晨一次性推送，动作应是信息/预估类而非立即执行类）：<b style="color:#bbb;">仅需出行的日程</b>给导航/打车（返回通勤耗时，便于规划几点出发）；<b style="color:#bbb;">会议 / 内部 / 案头类</b>不强加按钮（既防本地会议室被误判为异地，"加入会议"等即时动作也不适合清晨点击，归「今日事项」全天视图临近时浮现）。</span></p>
-<div style="font-size:13px;color:#f5a623;font-weight:600;margin-bottom:6px;">Miclaw 实测效果（两种方案对比）</div>
-<div style="font-size:12px;color:#888;margin-bottom:10px;">覆盖 5 类用户实测：企业中高层、大学生、商务出差、产品经理、自媒体人。</div>
-<div style="display:flex;gap:12px;">
-
-<!-- 方案A：完全规则化 -->
-<div style="flex:1;border:1px solid #2a4a2e;border-radius:8px;padding:12px 14px;font-size:13px;color:#bbb;line-height:1.7;background:#16201a;">
-<div style="color:#34c759;font-weight:600;margin-bottom:8px;">👍 方案A · 完全规则化</div>
-<div style="color:#8ed99a;font-weight:600;margin-bottom:3px;">做得好</div>
-<div style="margin-bottom:8px;">· 根据日程附带信息能生成正确的推荐按钮<br>· 能准确识别日程中的时间信息并给出建议</div>
-<div style="color:#ff9f6b;font-weight:600;margin-bottom:3px;">存在问题</div>
-<div>· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮</div>
-</div>
-
-<!-- 方案B：AI 自动生成 -->
-<div style="flex:1;border:1px solid #4a2a2a;border-radius:8px;padding:12px 14px;font-size:13px;color:#bbb;line-height:1.7;background:#201616;">
-<div style="color:#ff6b6b;font-weight:600;margin-bottom:8px;">❌ 方案B · AI 自动生成</div>
-<div style="color:#ff9f6b;font-weight:600;margin-bottom:3px;">存在问题</div>
-<div>· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮<br>· 未带地点的日程被 AI 识别为出行日程，也出现了打车/导航按钮</div>
-</div>
-
-</div>
 </div>
 
 <!-- 待办 -->
 <div class="card" style="margin-bottom:14px;border-left:3px solid #34c759;position:relative;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#34c759;font-size:18px;">←</span> ③ 待办事项</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
-<p style="margin-bottom:12px;"><b style="color:#fff;">待办摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">待办清单</b> <b style="color:#888;">＋</b> <b style="color:#fff;">快速新增</b>。无固定时间但今天该推进的事，承接日程之后的自由安排动作。</p>
-<div style="font-size:13px;color:#f5a623;font-weight:600;margin-bottom:6px;">Miclaw 实测效果</div>
-<div style="border:1px solid #2a4a2e;border-radius:8px;padding:12px 14px;font-size:13px;color:#bbb;line-height:1.7;background:#16201a;">
-<div style="color:#8ed99a;font-weight:600;margin-bottom:3px;">做得好</div>
-<div style="margin-bottom:8px;">· 摘要能准确统计当日未完成待办条数（如"3 项待办未完成"）<br>· 能识别并突出"今天到期"或"已逾期"的待办，置顶提醒优先处理</div>
-<div style="color:#ff9f6b;font-weight:600;margin-bottom:3px;">存在问题</div>
-<div>· 无明确截止时间的待办，紧急度判断仍偏保守，部分该提醒的未被突出</div>
-</div>
+<p><b style="color:#fff;">待办摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">待办清单</b> <b style="color:#888;">＋</b> <b style="color:#fff;">快速新增</b>。无固定时间但今天该推进的事，承接日程之后的自由安排动作。</p>
 </div>
 
 <!-- AI 快讯 -->
-<div class="card" style="margin-top:128px;margin-bottom:14px;border-left:3px solid #7b1fa2;position:relative;">
+<div class="card" style="margin-bottom:14px;border-left:3px solid #7b1fa2;position:relative;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#7b1fa2;font-size:18px;">←</span> ④ AI 快讯（资讯）</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
-<p style="margin-bottom:12px;"><b style="color:#fff;">资讯摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">资讯列表</b>。垫底，属"了解一下"的延伸阅读，不阻塞前面的行动决策。</p>
-<div style="font-size:13px;color:#f5a623;font-weight:600;margin-bottom:6px;">Miclaw 实测效果</div>
-<div style="font-size:12px;color:#888;margin-bottom:10px;">覆盖 5 类用户实测：企业中高层、大学生、商务出差、产品经理、自媒体人。</div>
-<div style="border:1px solid #2a4a2e;border-radius:8px;padding:12px 14px;font-size:13px;color:#bbb;line-height:1.7;background:#16201a;">
-<div style="color:#8ed99a;font-weight:600;margin-bottom:3px;">做得好</div>
-<div style="margin-bottom:8px;">· 能结合用户当天的日程与待办信息，推荐对应领域的资讯（如商务用户推行业/财经、大学生推校园/求职）<br>· 5 类用户画像下推荐方向均有明显区分，不是千人一面的通用热点</div>
-<div style="color:#ff9f6b;font-weight:600;margin-bottom:3px;">存在问题</div>
-<div>· 个性化主要依赖用户画像与日程关键词，命中精度仍待提升；与日程的关联度有时偏弱</div>
-</div>
+<p><b style="color:#fff;">资讯摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">资讯列表</b>。垫底，属"了解一下"的延伸阅读，不阻塞前面的行动决策。</p>
 </div>
 
 </div>
