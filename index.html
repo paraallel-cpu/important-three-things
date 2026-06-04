@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>今日事项 — 产品方案</title>
+<title>小爱简报 & 今日事项 — 产品方案</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, "PingFang SC", sans-serif; background: #121314; color: #eee; padding: 60px 40px; min-width: 1100px; font-size: 15px; }
@@ -174,7 +174,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="row" style="margin-top:16px;">
 <div class="card col">
 <h4>生成与推送时机</h4>
-<p><b style="color:#fff;">每天早晨固定时段生成</b>（默认 <b style="color:#fff;">06:30</b> 推送，跟随用户起床/解锁时机微调）<br><span style="color:#999;">依据：闹钟打点显示起床闹铃最高频集中在 07:00，故 06:30 推送，保证用户起床时早报内容已就位、第一眼即可见。</span><br>生成后通过锁屏通知、桌面"小爱建议"卡、负一屏多触点同步触达<br>当日无任何日程/待办时，仅保留天气 + 资讯，不推空卡</p>
+<p><b style="color:#fff;">每天早晨固定时段生成</b>（默认 <b style="color:#fff;">06:30</b> 推送，跟随用户起床/解锁时机微调）<br><span style="color:#999;">依据：闹钟打点显示起床闹铃最高频集中在 07:00，故 06:30 推送，保证用户起床时早报内容已就位、第一眼即可见。</span><br>生成后通过锁屏通知、桌面"小爱建议"卡同步触达（详见 03 章）<br>当日无任何日程/待办时，仅保留天气 + 资讯，不推空卡</p>
 </div>
 <div class="card col">
 <h4>与「今日事项」的边界</h4>
@@ -244,7 +244,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="section">
 <div class="section-num">03</div>
 <div class="section-title">桌面触点</div>
-<p style="font-size:15px;color:#888;margin-bottom:24px;">早报生成后在两个桌面位置同步呈现入口，点击均跳转「日报详情页」落地页。</p>
+<p style="font-size:15px;color:#888;margin-bottom:24px;">早报生成后在两个入口位置同步呈现，点击均跳转「简报详情页」落地页。</p>
 <div class="scheme-row" style="gap:56px;align-items:flex-start;padding-top:16px;">
 <div class="scheme-item">
 <img src="assets/zaobao-lock.png" style="width:300px;border-radius:34px;box-shadow:0 8px 40px rgba(0,0,0,.4);display:block;">
@@ -264,8 +264,8 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <!-- ===== 04 落地页板块排序 ===== -->
 <div class="section">
 <div class="section-num">04</div>
-<div class="section-title">落地页板块排序（日报详情页）</div>
-<p style="font-size:15px;color:#888;margin-bottom:24px;">所有桌面触点点击后统一进入「日报详情页」。板块自上而下按"<b style='color:#aaa;'>问候 → 天气 → 今日日程 → 待办 → 资讯</b>"排序——越靠上越与"今天必须知道/要做的事"相关，资讯作为延伸阅读垫底。</p>
+<div class="section-title">落地页板块排序（简报详情页）</div>
+<p style="font-size:15px;color:#888;margin-bottom:24px;">所有桌面触点点击后统一进入「简报详情页」。板块自上而下按"<b style='color:#aaa;'>问候 → 天气 → 今日日程 → 待办 → 资讯</b>"排序——越靠上越与"今天必须知道/要做的事"相关，资讯作为延伸阅读垫底。</p>
 <div class="row" style="align-items:flex-start;gap:48px;">
 <div style="flex-shrink:0;">
 <img src="assets/zaobao-detail.png" style="width:340px;border-radius:28px;box-shadow:0 8px 40px rgba(0,0,0,.3);display:block;">
@@ -466,7 +466,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="section">
 <div class="section-num">06</div>
 <div class="section-title">二级页跳转</div>
-<p style="font-size:15px;color:#888;margin-bottom:40px;">日报详情页是聚合页，每个板块点击后跳转到对应的系统原生二级页继续操作。下面逐一拆解每个板块的点击落点——左侧为简报内的板块切图，右侧为点击后跳转到的二级页。</p>
+<p style="font-size:15px;color:#888;margin-bottom:40px;">简报详情页是聚合页，每个板块点击后跳转到对应的系统原生二级页继续操作。下面逐一拆解每个板块的点击落点——左侧为简报内的板块切图，右侧为点击后跳转到的二级页。</p>
 
 <style>
 .jump-row { display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:48px; padding-bottom:48px; border-bottom:1px dashed #2a2b2e; }
@@ -587,7 +587,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 
 <hr class="divider">
 
-<!-- ===== 06 今日事项·总览 ===== -->
+<!-- ===== 07 今日事项 ===== -->
 <div class="section">
 <div class="section-num">07</div>
 <div class="section-title">今日事项</div>
