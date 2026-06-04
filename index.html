@@ -271,43 +271,57 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <img src="assets/zaobao-detail.png" style="width:340px;border-radius:28px;box-shadow:0 8px 40px rgba(0,0,0,.3);display:block;">
 </div>
 <div style="flex:1;">
-<div style="font-size:16px;font-weight:600;margin-bottom:18px;color:#74b9ff;">逐板块拆解</div>
+<div style="font-size:16px;font-weight:600;margin-bottom:18px;color:#74b9ff;">逐板块拆解 <span style="font-size:12px;font-weight:400;color:#666;">（每张卡纵向对齐左图对应板块）</span></div>
+<div style="position:relative;height:2014px;">
+
+<!-- 语音播报策略 -->
+<div class="card" style="position:absolute;left:0;right:0;top:0;border-left:3px solid #ff9500;">
+<h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#ff9500;font-size:18px;">🔊</span> 顶部 · 语音播报</h4>
+<div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
+<p style="margin-bottom:12px;">右上角<b style="color:#fff;">喇叭按钮</b>，点击即可语音播报当日早报，解放双眼，适配洗漱/通勤/早餐等晨间场景。</p>
+<div style="font-size:13px;color:#ff9500;font-weight:600;margin-bottom:6px;">分期策略</div>
+<div style="font-size:13px;color:#bbb;line-height:1.8;">
+<b style="color:#fff;">一期</b>：调用 <b style="color:#ddd;">MiMo TTS</b> 能力，<b style="color:#ddd;">仅播报摘要</b>（问候 + 天气 + 日程/待办要点）；进一步的对话交互交给小爱本身实现。<br>
+<b style="color:#fff;">二期</b>：接入<b style="color:#ddd;">播客能力</b>，实现自然口语化播报，支持<b style="color:#ddd;">随时打断</b>——打断后能接着聊、聊完接着播，做到"边听边问"。
+</div>
+</div>
 
 <!-- 问候语 -->
-<div class="card" style="margin-bottom:14px;border-left:3px solid #007aff;position:relative;">
+<div class="card" style="position:absolute;left:0;right:0;top:210px;border-left:3px solid #007aff;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#007aff;font-size:18px;">←</span> 顶部 · 问候语</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
 <p>问候语 <b style="color:#888;">＋</b> 日期副文案。建立早间陪伴感并交代日期锚点。</p>
 </div>
 
 <!-- 天气 -->
-<div class="card" style="margin-bottom:14px;border-left:3px solid #4a90d9;position:relative;">
+<div class="card" style="position:absolute;left:0;right:0;top:360px;border-left:3px solid #4a90d9;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#4a90d9;font-size:18px;">←</span> ① 天气</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
 <p><b style="color:#fff;">天气摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">天气卡</b>。出门前最先要决策的就是穿衣带伞，故置顶。</p>
 </div>
 
 <!-- 今日日程 -->
-<div class="card" style="margin-bottom:14px;border-left:3px solid #e65100;position:relative;">
+<div class="card" style="position:absolute;left:0;right:0;top:560px;border-left:3px solid #e65100;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#e65100;font-size:18px;">←</span> ② 今日日程</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
 <p style="margin-bottom:12px;"><b style="color:#fff;">今日事件摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">日程展示</b> <b style="color:#888;">＋</b> <b style="color:#fff;">冲突提醒</b> <b style="color:#888;">＋</b> <b style="color:#fff;">快捷操作</b>。当天必须赴约的硬性安排，紧随天气。<br><span style="color:#999;">快捷操作遵循"<b style="color:#bbb;">点了能帮用户规划今天</b>"原则（早报清晨一次性推送，动作应是信息/预估类而非立即执行类）：<b style="color:#bbb;">仅需出行的日程</b>给导航/打车（返回通勤耗时，便于规划几点出发）；<b style="color:#bbb;">会议 / 内部 / 案头类</b>不强加按钮（既防本地会议室被误判为异地，"加入会议"等即时动作也不适合清晨点击，归「今日事项」全天视图临近时浮现）。</span></p>
 </div>
 
 <!-- 待办 -->
-<div class="card" style="margin-bottom:14px;border-left:3px solid #34c759;position:relative;">
+<div class="card" style="position:absolute;left:0;right:0;top:935px;border-left:3px solid #34c759;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#34c759;font-size:18px;">←</span> ③ 待办事项</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
 <p><b style="color:#fff;">待办摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">待办清单</b> <b style="color:#888;">＋</b> <b style="color:#fff;">快速新增</b>。无固定时间但今天该推进的事，承接日程之后的自由安排动作。</p>
 </div>
 
 <!-- AI 快讯 -->
-<div class="card" style="margin-bottom:14px;border-left:3px solid #7b1fa2;position:relative;">
+<div class="card" style="position:absolute;left:0;right:0;top:1276px;border-left:3px solid #7b1fa2;">
 <h4 style="display:flex;align-items:center;gap:8px;"><span style="color:#7b1fa2;font-size:18px;">←</span> ④ AI 快讯（资讯）</h4>
 <div style="font-size:13px;color:#74b9ff;font-weight:600;margin:6px 0 4px;">构成</div>
 <p><b style="color:#fff;">资讯摘要</b> <b style="color:#888;">＋</b> <b style="color:#fff;">资讯列表</b>。垫底，属"了解一下"的延伸阅读，不阻塞前面的行动决策。</p>
 </div>
 
+</div>
 </div>
 </div>
 </div>
@@ -317,9 +331,7 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <!-- ===== 05 Miclaw 实测效果 ===== -->
 <div class="section">
 <div class="section-num">05</div>
-<div class="section-title">Miclaw 实测效果</div>
-<p style="font-size:15px;color:#888;margin-bottom:8px;">基于 Miclaw 对早报核心能力的真机实测，覆盖<b style="color:#aaa;">天气卡片、日程提取、资讯推荐</b>三大模块。整体看：天气与资讯推荐基本达到可用，日程的<b style="color:#aaa;">出行识别（打车/导航按钮）</b>是当前最大的准确率短板——无论规则化还是 AI 方案，都存在把会议室/近距离/无地点日程误判为"需出行"的问题，需在落地前重点优化。</p>
-<div style="font-size:13px;color:#666;margin-bottom:36px;">数据来源：<a href="https://mi.feishu.cn/wiki/FEF1wCf9tiufZ9kY1UXcHyvXnPg" style="color:#4a90d9;text-decoration:none;">飞书《晨间早报 demo 效果呈现》</a>。下方截图为实测真机效果。</div>
+<div class="section-title" style="margin-bottom:36px;">Miclaw 实测效果</div>
 
 <style>
 .mtest-block { margin-bottom:48px; }
