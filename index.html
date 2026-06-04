@@ -353,9 +353,85 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 
 <hr class="divider">
 
-<!-- ===== 05 二级页跳转 ===== -->
+<!-- ===== 05 Miclaw 实测效果 ===== -->
 <div class="section">
 <div class="section-num">05</div>
+<div class="section-title">Miclaw 实测效果</div>
+<p style="font-size:15px;color:#888;margin-bottom:8px;">基于 Miclaw 对早报核心能力的真机实测，覆盖<b style="color:#aaa;">天气卡片、日程提取、资讯推荐</b>三大模块。整体看：天气与资讯推荐基本达到可用，日程的<b style="color:#aaa;">出行识别（打车/导航按钮）</b>是当前最大的准确率短板——无论规则化还是 AI 方案，都存在把会议室/近距离/无地点日程误判为"需出行"的问题，需在落地前重点优化。</p>
+<div style="font-size:13px;color:#666;margin-bottom:36px;">数据来源：<a href="https://mi.feishu.cn/wiki/FEF1wCf9tiufZ9kY1UXcHyvXnPg" style="color:#4a90d9;text-decoration:none;">飞书《晨间早报 demo 效果呈现》</a>。下方截图为实测真机效果。</div>
+
+<style>
+.mtest-block { margin-bottom:48px; }
+.mtest-h { font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff; }
+.mtest-sub { font-size:14px;color:#888;margin-bottom:18px; }
+.mtest-grid4 { display:grid;grid-template-columns:repeat(4,1fr);gap:20px; }
+.mtest-card { background:#1a1b1e;border:1px solid #2a2b2e;border-radius:12px;padding:16px;text-align:center; }
+.mtest-card .cap { font-size:14px;font-weight:600;color:#fff;margin-bottom:12px; }
+.mtest-shot { width:100%;aspect-ratio:9/19.5;border:1.5px dashed #3a3a3e;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#555;font-size:12px;text-align:center;line-height:1.6;background:#141518;overflow:hidden; }
+.mtest-shot img { width:100%;height:100%;object-fit:cover;object-position:top;border-radius:13px;display:block; }
+.mtest-note { font-size:13px;color:#999;margin-top:12px;line-height:1.6;text-align:left; }
+.mtest-concl { border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.7;margin-top:14px; }
+.concl-good { background:#16201a;border:1px solid #2a4a2e; }
+.concl-good .t { color:#34c759;font-weight:600;margin-bottom:4px; }
+.concl-bad { background:#201616;border:1px solid #4a2a2a; }
+.concl-bad .t { color:#ff6b6b;font-weight:600;margin-bottom:4px; }
+.concl-good .body,.concl-bad .body { color:#bbb; }
+</style>
+
+<!-- ① 天气卡片 -->
+<div class="mtest-block">
+<div class="mtest-h">① 天气卡片：多天气态适配</div>
+<div class="mtest-sub">实测 4 种典型天气态，验证卡片样式与提醒文案能否随天气切换。</div>
+<div class="mtest-grid4">
+<div class="mtest-card"><div class="cap">☀️ 天晴高温</div><div class="mtest-shot"><span>待放图<br>天气-天晴.png</span></div></div>
+<div class="mtest-card"><div class="cap">🌧 下雨</div><div class="mtest-shot"><span>待放图<br>天气-下雨.png</span></div></div>
+<div class="mtest-card"><div class="cap">🌫 雾霾</div><div class="mtest-shot"><span>待放图<br>天气-雾霾.png</span></div></div>
+<div class="mtest-card"><div class="cap">❄️ 大雪</div><div class="mtest-shot"><span>待放图<br>天气-大雪.png</span></div></div>
+</div>
+<div class="mtest-concl concl-good"><div class="t">✅ 结论：达到可用</div><div class="body">能按不同天气态生成对应的卡片样式与提醒（高温防晒、降雨带伞、雾霾口罩、大雪防滑），温度 / 空气质量 / 逐时 / 一周高低温信息完整。待优化：极端天气提醒文案仍偏模板化，未结合当天出行日程做个性化叮嘱。</div></div>
+</div>
+
+<!-- ② 日程提取 -->
+<div class="mtest-block">
+<div class="mtest-h">② 日程提取：出行识别是最大短板</div>
+<div class="mtest-sub">对比两种方案：方案A 完全规则化 vs 方案B AI 自动生成，验证日程→快捷操作按钮（打车/导航）的识别准确率。</div>
+<div style="display:flex;gap:20px;">
+<div class="mtest-card" style="flex:1;">
+<div class="cap">👍 方案A · 完全规则化</div>
+<div class="mtest-shot" style="aspect-ratio:auto;min-height:280px;"><span>待放图<br>日程-规则化.png</span></div>
+<div class="mtest-concl concl-good" style="margin-top:12px;"><div class="t">做得好</div><div class="body">· 根据日程附带信息能生成正确的推荐按钮<br>· 能准确识别日程中的时间信息并给出建议</div></div>
+<div class="mtest-concl concl-bad"><div class="t">存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮</div></div>
+</div>
+<div class="mtest-card" style="flex:1;">
+<div class="cap">❌ 方案B · AI 自动生成</div>
+<div class="mtest-shot" style="aspect-ratio:auto;min-height:280px;"><span>待放图<br>日程-AI.png</span></div>
+<div class="mtest-concl concl-bad" style="margin-top:12px;"><div class="t">存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮<br>· 离所在地很近的位置也被识别为远距离，出现打车按钮<br>· 未带地点的日程被 AI 识别为出行日程，也出现打车/导航按钮</div></div>
+</div>
+</div>
+<div class="mtest-concl concl-bad" style="background:#1a1b1e;border-color:#4a3a2a;"><div class="t" style="color:#f5a623;">⚠️ 综合结论：需重点优化</div><div class="body" style="color:#bbb;">两套方案都存在"出行判定过宽"的通病——会议室、近距离、无地点日程被误加打车/导航按钮。落地策略：<b style="color:#ddd;">快捷操作按日程类型差异化</b>，仅"明确需要出行"的日程（拜访、就医、赶高铁）才给导航/打车，会议/内部/案头类不强加，避免误判。</div></div>
+</div>
+
+<!-- ③ 资讯推荐 -->
+<div class="mtest-block">
+<div class="mtest-h">③ 资讯推荐：5 类用户画像个性化</div>
+<div class="mtest-sub">按 5 类典型用户画像实测，验证资讯能否结合用户日程/待办做个性化推荐。</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;">
+<div class="mtest-card"><div class="cap" style="font-size:13px;">用户1<br><span style="color:#888;font-weight:400;">企业中高层</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户1.png</span></div></div>
+<div class="mtest-card"><div class="cap" style="font-size:13px;">用户2<br><span style="color:#888;font-weight:400;">大学生</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户2.png</span></div></div>
+<div class="mtest-card"><div class="cap" style="font-size:13px;">用户3<br><span style="color:#888;font-weight:400;">商务出差</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户3.png</span></div></div>
+<div class="mtest-card"><div class="cap" style="font-size:13px;">用户4<br><span style="color:#888;font-weight:400;">产品经理</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户4.png</span></div></div>
+<div class="mtest-card"><div class="cap" style="font-size:13px;">用户5<br><span style="color:#888;font-weight:400;">自媒体人</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户5.png</span></div></div>
+</div>
+<div class="mtest-concl concl-good"><div class="t">✅ 结论：达到可用</div><div class="body">能结合用户当天的日程与待办，推荐对应领域的资讯（如商务用户推行业/财经、大学生推校园/求职），5 类画像下推荐方向区分明显，不是千人一面的通用热点。待优化：个性化主要依赖画像与日程关键词，命中精度仍待提升，与日程的关联度有时偏弱。</div></div>
+</div>
+
+</div>
+
+<hr class="divider">
+
+<!-- ===== 06 二级页跳转 ===== -->
+<div class="section">
+<div class="section-num">06</div>
 <div class="section-title">二级页跳转</div>
 <p style="font-size:15px;color:#888;margin-bottom:40px;">日报详情页是聚合页，每个板块点击后跳转到对应的系统原生二级页继续操作。下面逐一拆解每个板块的点击落点——左侧为简报内的板块切图，右侧为点击后跳转到的二级页。</p>
 
@@ -441,13 +517,13 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 
 <!-- ===== 06 今日事项·总览 ===== -->
 <div class="section">
-<div class="section-num">06</div>
+<div class="section-num">07</div>
 <div class="section-title">今日事项</div>
 <p style="font-size:15px;color:#888;margin-bottom:32px;">把日历的「日视图」从一张静态台历壁纸，改造成用户每天<b style="color:#aaa;">主动来看的「今天该关注什么」信息页</b>，并通过锁屏 / 桌面 / 负一屏多入口主动触达。本章按 <b style="color:#aaa;">现状与痛点 → 新的设计样式 → 从哪里触达 → 推送时机</b> 一次讲清，界面直接看图。</p>
 
-<!-- 6.1 为什么改 -->
+<!-- 7.1 为什么改 -->
 <div style="margin-bottom:40px;">
-<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">6.1 为什么改：原来的日视图是一张「台历壁纸」</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">7.1 为什么改：原来的日视图是一张「台历壁纸」</div>
 <div style="font-size:15px;color:#888;margin-bottom:16px;">老版日视图主体是一张壁纸 + 一个时间轴，用户看不到"今天到底有几件事、哪件最该紧张"，重要信息还散落在短信、各 App 通知里。</div>
 <div class="bg-grid">
 <div class="bg-card">
@@ -467,9 +543,9 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 
 <hr style="border:none;border-top:1px solid #2a2b2e;margin:56px auto;max-width:100%;">
 
-<!-- 6.2 新的设计样式 -->
+<!-- 7.2 新的设计样式 -->
 <div style="margin-bottom:40px;">
-<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">6.2 新的设计样式：日视图 = 今日全景信息页</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">7.2 新的设计样式：日视图 = 今日全景信息页</div>
 <div style="font-size:15px;color:#888;margin-bottom:24px;">保留台历壁纸入场，但默认态就在壁纸下方露出「需关注」摘要；用户上滑后壁纸收起，整页变成今日全景信息列表：顶部天气 → 需关注事项置顶（红字徽章）→ 今日事项列表（按时间排序、远期灰显）→ 底部 Tab。它同时也是小爱简报里日程板块的二级落地页，两个功能共用同一页面。下面是<b style="color:#aaa;">线上当前样式 → 改版默认态 → 改版上滑态</b>的对比。</div>
 
 <!-- 线上 vs 改版 对比 -->
@@ -502,9 +578,9 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 
 <hr style="border:none;border-top:1px solid #2a2b2e;margin:56px auto;max-width:100%;">
 
-<!-- 6.3 从哪里触达 -->
+<!-- 7.3 从哪里触达 -->
 <div style="margin-bottom:40px;">
-<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">6.3 从哪里触达：四个入口主动推，统一落地日视图</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">7.3 从哪里触达：四个入口主动推，统一落地日视图</div>
 <div style="font-size:15px;color:#888;margin-bottom:24px;">不依赖用户主动打开日历，而是在用户每天必经的触点上主动呈现摘要，点击后统一跳转到上面改造后的日视图。以下为各入口的推荐样式。</div>
 <div style="display:flex;gap:32px;align-items:flex-start;justify-content:center;flex-wrap:wrap;">
 
@@ -599,9 +675,9 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 
 <hr style="border:none;border-top:1px solid #2a2b2e;margin:56px auto;max-width:100%;">
 
-<!-- 6.4 提醒策略 -->
+<!-- 7.4 提醒策略 -->
 <div>
-<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">6.4 推送时机：定时推 + 只推有增量的事</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">7.4 推送时机：定时推 + 只推有增量的事</div>
 <div style="font-size:15px;color:#888;margin-bottom:16px;">第一期固定三次推送，配合去重与静默规则，保证"该提醒的不漏、重复的不烦"。</div>
 <div class="row" style="margin-bottom:16px;">
 <div class="card col">
@@ -617,14 +693,14 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <h4>静默规则（节选）</h4>
 <p><b style="color:#f5a623;">已开启小爱简报：</b>跳过早间推送（简报已覆盖），仅保留午间 + 晚间<br><b style="color:#f5a623;">勿扰 / 通话中：</b>延后到结束后补推；<b style="color:#f5a623;">无事项：</b>不推空卡片<br><b style="color:#f5a623;">长期无互动：</b>连续 3 天无事项降频；连续 7 天无互动暂停，下次打开日历恢复</p>
 </div>
-<p style="font-size:14px;color:#666;margin-top:12px;">完整的推送时机 / 数据来源 / 推送条件 / 通知去重 / 触达形态 / 静默规则定义见下文 <b style="color:#999;">6.6 完整推送策略规则</b>。</p>
+<p style="font-size:14px;color:#666;margin-top:12px;">完整的推送时机 / 数据来源 / 推送条件 / 通知去重 / 触达形态 / 静默规则定义见下文 <b style="color:#999;">7.6 完整推送策略规则</b>。</p>
 </div>
 
 <hr style="border:none;border-top:1px solid #2a2b2e;margin:56px auto;max-width:100%;">
 
-<!-- 6.5 可交互 Demo -->
+<!-- 7.5 可交互 Demo -->
 <div style="margin-bottom:40px;">
-<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">6.5 可交互 Demo：完整链路体验</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">7.5 可交互 Demo：完整链路体验</div>
 <p style="font-size:15px;color:#888;margin-bottom:20px;">点击按钮切换页面。页面内卡片可点击跳转，体验完整链路。</p>
 
 <div style="display:flex;gap:24px;align-items:flex-start;justify-content:center;min-height:950px;">
@@ -719,9 +795,9 @@ goDemo('lock',document.querySelector('.demo-btn'));
 
 <hr style="border:none;border-top:1px solid #2a2b2e;margin:56px auto;max-width:100%;">
 
-<!-- 6.6 完整推送策略规则 -->
+<!-- 7.6 完整推送策略规则 -->
 <div style="margin-bottom:40px;">
-<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">6.6 完整推送策略规则</div>
+<div style="font-size:18px;font-weight:600;margin-bottom:6px;color:#74b9ff;">7.6 完整推送策略规则</div>
 <p style="font-size:15px;color:#888;margin-bottom:24px;">本节是推送系统的完整规则定义，供开发和测试对齐。</p>
 
 <!-- 7.1 推送时机 -->
