@@ -382,13 +382,13 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="mtest-block">
 <div class="mtest-h">① 天气卡片：多天气态适配</div>
 <div class="mtest-sub">实测 4 种典型天气态，验证卡片样式与提醒文案能否随天气切换。</div>
+<div class="mtest-concl concl-good" style="margin-top:0;margin-bottom:18px;"><div class="t">✅ 结论：达到可用</div><div class="body">能按不同天气态生成对应的卡片样式与提醒（高温防晒、降雨带伞、雾霾口罩、大雪防滑），温度 / 空气质量 / 逐时 / 一周高低温信息完整。待优化：极端天气提醒文案仍偏模板化，未结合当天出行日程做个性化叮嘱。</div></div>
 <div class="mtest-grid4">
 <div class="mtest-card"><div class="cap">☀️ 天晴高温</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-sunny.png" style="object-fit:contain;"></div></div>
 <div class="mtest-card"><div class="cap">🌧 暴雨</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-rain.png" style="object-fit:contain;"></div></div>
 <div class="mtest-card"><div class="cap">🌫 重度污染</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-smog.png" style="object-fit:contain;"></div></div>
 <div class="mtest-card"><div class="cap">❄️ 大雪</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-snow.png" style="object-fit:contain;"></div></div>
 </div>
-<div class="mtest-concl concl-good"><div class="t">✅ 结论：达到可用</div><div class="body">能按不同天气态生成对应的卡片样式与提醒（高温防晒、降雨带伞、雾霾口罩、大雪防滑），温度 / 空气质量 / 逐时 / 一周高低温信息完整。待优化：极端天气提醒文案仍偏模板化，未结合当天出行日程做个性化叮嘱。</div></div>
 </div>
 
 <!-- ② 日程提取 + ③ 资讯推荐：5类用户实测表格 -->
@@ -406,6 +406,13 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 .utest-user span { display:block;color:#888;font-weight:400;font-size:12px;margin-top:3px; }
 .utest-img { width:150px;border-radius:10px;border:1px solid #2a2b2e;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(0,0,0,.3); }
 </style>
+
+<div style="display:flex;gap:20px;margin-bottom:14px;">
+<div class="mtest-concl concl-good" style="flex:1;margin-top:0;"><div class="t">✅ 日程提取 · 做得好</div><div class="body">· 根据日程附带信息能生成正确的推荐按钮<br>· 能准确识别日程中的时间信息并给出建议</div></div>
+<div class="mtest-concl concl-bad" style="flex:1;margin-top:0;"><div class="t">❌ 日程提取 · 存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮<br>· 离所在地很近的位置也被识别为远距离，出现打车按钮<br>· 未带地点的日程被 AI 误判为出行日程，也出现打车/导航按钮</div></div>
+</div>
+<div class="mtest-concl concl-bad" style="background:#1a1b1e;border-color:#4a3a2a;margin-top:0;"><div class="t" style="color:#f5a623;">⚠️ 日程综合结论：需重点优化</div><div class="body" style="color:#bbb;">两套方案都存在"出行判定过宽"的通病——会议室、近距离、无地点日程被误加打车/导航按钮。落地策略：<b style="color:#ddd;">快捷操作按日程类型差异化</b>，仅"明确需要出行"的日程（拜访、就医、赶高铁）才给导航/打车，会议/内部/案头类不强加，避免误判。</div></div>
+<div class="mtest-concl concl-good" style="margin-bottom:20px;"><div class="t">✅ 资讯推荐结论：达到可用</div><div class="body">能结合用户当天的日程与待办，推荐对应领域的资讯（如商务用户推行业/财经、大学生推校园/求职），5 类画像下推荐方向区分明显，不是千人一面的通用热点。待优化：个性化主要依赖画像与日程关键词，命中精度仍待提升，与日程的关联度有时偏弱。</div></div>
 
 <table class="utest-table">
 <thead><tr>
@@ -449,13 +456,6 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 </tr>
 </tbody>
 </table>
-
-<div style="display:flex;gap:20px;margin-top:8px;">
-<div class="mtest-concl concl-good" style="flex:1;margin-top:0;"><div class="t">✅ 日程提取 · 做得好</div><div class="body">· 根据日程附带信息能生成正确的推荐按钮<br>· 能准确识别日程中的时间信息并给出建议</div></div>
-<div class="mtest-concl concl-bad" style="flex:1;margin-top:0;"><div class="t">❌ 日程提取 · 存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮<br>· 离所在地很近的位置也被识别为远距离，出现打车按钮<br>· 未带地点的日程被 AI 误判为出行日程，也出现打车/导航按钮</div></div>
-</div>
-<div class="mtest-concl concl-bad" style="background:#1a1b1e;border-color:#4a3a2a;"><div class="t" style="color:#f5a623;">⚠️ 日程综合结论：需重点优化</div><div class="body" style="color:#bbb;">两套方案都存在"出行判定过宽"的通病——会议室、近距离、无地点日程被误加打车/导航按钮。落地策略：<b style="color:#ddd;">快捷操作按日程类型差异化</b>，仅"明确需要出行"的日程（拜访、就医、赶高铁）才给导航/打车，会议/内部/案头类不强加，避免误判。</div></div>
-<div class="mtest-concl concl-good"><div class="t">✅ 资讯推荐结论：达到可用</div><div class="body">能结合用户当天的日程与待办，推荐对应领域的资讯（如商务用户推行业/财经、大学生推校园/求职），5 类画像下推荐方向区分明显，不是千人一面的通用热点。待优化：个性化主要依赖画像与日程关键词，命中精度仍待提升，与日程的关联度有时偏弱。</div></div>
 </div>
 
 </div>
