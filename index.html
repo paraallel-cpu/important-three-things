@@ -383,46 +383,79 @@ h1 { text-align: center; font-size: 36px; margin-bottom: 60px; }
 <div class="mtest-h">① 天气卡片：多天气态适配</div>
 <div class="mtest-sub">实测 4 种典型天气态，验证卡片样式与提醒文案能否随天气切换。</div>
 <div class="mtest-grid4">
-<div class="mtest-card"><div class="cap">☀️ 天晴高温</div><div class="mtest-shot"><span>待放图<br>天气-天晴.png</span></div></div>
-<div class="mtest-card"><div class="cap">🌧 下雨</div><div class="mtest-shot"><span>待放图<br>天气-下雨.png</span></div></div>
-<div class="mtest-card"><div class="cap">🌫 雾霾</div><div class="mtest-shot"><span>待放图<br>天气-雾霾.png</span></div></div>
-<div class="mtest-card"><div class="cap">❄️ 大雪</div><div class="mtest-shot"><span>待放图<br>天气-大雪.png</span></div></div>
+<div class="mtest-card"><div class="cap">☀️ 天晴高温</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-sunny.png" style="object-fit:contain;"></div></div>
+<div class="mtest-card"><div class="cap">🌧 暴雨</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-rain.png" style="object-fit:contain;"></div></div>
+<div class="mtest-card"><div class="cap">🌫 重度污染</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-smog.png" style="object-fit:contain;"></div></div>
+<div class="mtest-card"><div class="cap">❄️ 大雪</div><div class="mtest-shot" style="aspect-ratio:auto;"><img src="assets/miclaw-test/w-snow.png" style="object-fit:contain;"></div></div>
 </div>
 <div class="mtest-concl concl-good"><div class="t">✅ 结论：达到可用</div><div class="body">能按不同天气态生成对应的卡片样式与提醒（高温防晒、降雨带伞、雾霾口罩、大雪防滑），温度 / 空气质量 / 逐时 / 一周高低温信息完整。待优化：极端天气提醒文案仍偏模板化，未结合当天出行日程做个性化叮嘱。</div></div>
 </div>
 
-<!-- ② 日程提取 -->
+<!-- ② 日程提取 + ③ 资讯推荐：5类用户实测表格 -->
 <div class="mtest-block">
-<div class="mtest-h">② 日程提取：出行识别是最大短板</div>
-<div class="mtest-sub">对比两种方案：方案A 完全规则化 vs 方案B AI 自动生成，验证日程→快捷操作按钮（打车/导航）的识别准确率。</div>
-<div style="display:flex;gap:20px;">
-<div class="mtest-card" style="flex:1;">
-<div class="cap">👍 方案A · 完全规则化</div>
-<div class="mtest-shot" style="aspect-ratio:auto;min-height:280px;"><span>待放图<br>日程-规则化.png</span></div>
-<div class="mtest-concl concl-good" style="margin-top:12px;"><div class="t">做得好</div><div class="body">· 根据日程附带信息能生成正确的推荐按钮<br>· 能准确识别日程中的时间信息并给出建议</div></div>
-<div class="mtest-concl concl-bad"><div class="t">存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮</div></div>
-</div>
-<div class="mtest-card" style="flex:1;">
-<div class="cap">❌ 方案B · AI 自动生成</div>
-<div class="mtest-shot" style="aspect-ratio:auto;min-height:280px;"><span>待放图<br>日程-AI.png</span></div>
-<div class="mtest-concl concl-bad" style="margin-top:12px;"><div class="t">存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮<br>· 离所在地很近的位置也被识别为远距离，出现打车按钮<br>· 未带地点的日程被 AI 识别为出行日程，也出现打车/导航按钮</div></div>
-</div>
-</div>
-<div class="mtest-concl concl-bad" style="background:#1a1b1e;border-color:#4a3a2a;"><div class="t" style="color:#f5a623;">⚠️ 综合结论：需重点优化</div><div class="body" style="color:#bbb;">两套方案都存在"出行判定过宽"的通病——会议室、近距离、无地点日程被误加打车/导航按钮。落地策略：<b style="color:#ddd;">快捷操作按日程类型差异化</b>，仅"明确需要出行"的日程（拜访、就医、赶高铁）才给导航/打车，会议/内部/案头类不强加，避免误判。</div></div>
-</div>
+<div class="mtest-h">② 日程提取 + 资讯推荐：5 类用户画像实测</div>
+<div class="mtest-sub">按 5 类典型用户画像真机实测。每行展示该用户的：原日程 → 日程提取（方案A 规则化 / 方案B AI 自动生成）→ 资讯推荐。重点验证日程→快捷操作（打车/导航）识别准确率，及资讯的个性化命中。</div>
 
-<!-- ③ 资讯推荐 -->
-<div class="mtest-block">
-<div class="mtest-h">③ 资讯推荐：5 类用户画像个性化</div>
-<div class="mtest-sub">按 5 类典型用户画像实测，验证资讯能否结合用户日程/待办做个性化推荐。</div>
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;">
-<div class="mtest-card"><div class="cap" style="font-size:13px;">用户1<br><span style="color:#888;font-weight:400;">企业中高层</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户1.png</span></div></div>
-<div class="mtest-card"><div class="cap" style="font-size:13px;">用户2<br><span style="color:#888;font-weight:400;">大学生</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户2.png</span></div></div>
-<div class="mtest-card"><div class="cap" style="font-size:13px;">用户3<br><span style="color:#888;font-weight:400;">商务出差</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户3.png</span></div></div>
-<div class="mtest-card"><div class="cap" style="font-size:13px;">用户4<br><span style="color:#888;font-weight:400;">产品经理</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户4.png</span></div></div>
-<div class="mtest-card"><div class="cap" style="font-size:13px;">用户5<br><span style="color:#888;font-weight:400;">自媒体人</span></div><div class="mtest-shot"><span>待放图<br>资讯-用户5.png</span></div></div>
+<style>
+.utest-table { width:100%;border-collapse:separate;border-spacing:0;margin-bottom:20px; }
+.utest-table th { font-size:13px;font-weight:600;color:#74b9ff;padding:10px 8px;text-align:center;border-bottom:1px solid #2a2b2e; }
+.utest-table th.rule { color:#34c759; }
+.utest-table th.ai { color:#ff6b6b; }
+.utest-table td { padding:14px 8px;border-bottom:1px solid #222;vertical-align:top;text-align:center; }
+.utest-user { width:96px;font-size:13px;color:#fff;font-weight:600;line-height:1.5; }
+.utest-user span { display:block;color:#888;font-weight:400;font-size:12px;margin-top:3px; }
+.utest-img { width:150px;border-radius:10px;border:1px solid #2a2b2e;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(0,0,0,.3); }
+</style>
+
+<table class="utest-table">
+<thead><tr>
+<th>用户画像</th><th>原日程</th><th class="rule">👍 方案A·规则化</th><th class="ai">❌ 方案B·AI生成</th><th>资讯推荐</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="utest-user">用户1<span>企业中高层</span></td>
+<td><img class="utest-img" src="assets/miclaw-test/u1-sched.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u1-rule.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u1-ai.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u1-news.png"></td>
+</tr>
+<tr>
+<td class="utest-user">用户2<span>大学生</span></td>
+<td><img class="utest-img" src="assets/miclaw-test/u2-sched.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u2-rule.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u2-ai.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u2-news.png"></td>
+</tr>
+<tr>
+<td class="utest-user">用户3<span>商务出差</span></td>
+<td><img class="utest-img" src="assets/miclaw-test/u3-sched.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u3-rule.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u3-ai.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u3-news.png"></td>
+</tr>
+<tr>
+<td class="utest-user">用户4<span>产品经理</span></td>
+<td><img class="utest-img" src="assets/miclaw-test/u4-sched.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u4-rule.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u4-ai.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u4-news.png"></td>
+</tr>
+<tr>
+<td class="utest-user">用户5<span>自媒体人</span></td>
+<td><img class="utest-img" src="assets/miclaw-test/u5-sched.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u5-rule.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u5-ai.png"></td>
+<td><img class="utest-img" src="assets/miclaw-test/u5-news.png"></td>
+</tr>
+</tbody>
+</table>
+
+<div style="display:flex;gap:20px;margin-top:8px;">
+<div class="mtest-concl concl-good" style="flex:1;margin-top:0;"><div class="t">✅ 日程提取 · 做得好</div><div class="body">· 根据日程附带信息能生成正确的推荐按钮<br>· 能准确识别日程中的时间信息并给出建议</div></div>
+<div class="mtest-concl concl-bad" style="flex:1;margin-top:0;"><div class="t">❌ 日程提取 · 存在问题</div><div class="body">· 教室 / 会议室地址被识别为异地，错误出现打车/导航按钮<br>· 离所在地很近的位置也被识别为远距离，出现打车按钮<br>· 未带地点的日程被 AI 误判为出行日程，也出现打车/导航按钮</div></div>
 </div>
-<div class="mtest-concl concl-good"><div class="t">✅ 结论：达到可用</div><div class="body">能结合用户当天的日程与待办，推荐对应领域的资讯（如商务用户推行业/财经、大学生推校园/求职），5 类画像下推荐方向区分明显，不是千人一面的通用热点。待优化：个性化主要依赖画像与日程关键词，命中精度仍待提升，与日程的关联度有时偏弱。</div></div>
+<div class="mtest-concl concl-bad" style="background:#1a1b1e;border-color:#4a3a2a;"><div class="t" style="color:#f5a623;">⚠️ 日程综合结论：需重点优化</div><div class="body" style="color:#bbb;">两套方案都存在"出行判定过宽"的通病——会议室、近距离、无地点日程被误加打车/导航按钮。落地策略：<b style="color:#ddd;">快捷操作按日程类型差异化</b>，仅"明确需要出行"的日程（拜访、就医、赶高铁）才给导航/打车，会议/内部/案头类不强加，避免误判。</div></div>
+<div class="mtest-concl concl-good"><div class="t">✅ 资讯推荐结论：达到可用</div><div class="body">能结合用户当天的日程与待办，推荐对应领域的资讯（如商务用户推行业/财经、大学生推校园/求职），5 类画像下推荐方向区分明显，不是千人一面的通用热点。待优化：个性化主要依赖画像与日程关键词，命中精度仍待提升，与日程的关联度有时偏弱。</div></div>
 </div>
 
 </div>
